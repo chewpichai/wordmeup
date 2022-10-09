@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { Nav } from 'components'
 import { userService } from 'services'
-import 'styles/softui.css'
 import 'styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
