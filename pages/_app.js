@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { Nav } from 'components'
 import { userService } from 'services'
+import 'styles/softui.css'
 import 'styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
@@ -28,6 +29,10 @@ function MyApp({ Component, pageProps }) {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    $('.navbar-collapse.collapse').removeClass('show')
+  }, [authorized])
 
   function authCheck(url) {
     const publicPaths = ['/']

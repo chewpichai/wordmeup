@@ -25,20 +25,21 @@ export default function Home() {
       .catch((err) => alert(err.response.data))
   }
 
+  if (userService.userValue)
+    return ''
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="form-group">
-        <label htmlFor="username">Username</label>
         <input
-          type="text" id="username"
+          type="text" placeholder="Username"
           className={`form-control ${errors.username ? 'is-invalid' : ''}`}
           { ...register('username') }
         />
       </div>
       <div className="form-group">
-        <label htmlFor="password">Password</label>
         <input
-          type="password" id="password"
+          type="password" placeholder="Password"
           className={`form-control ${errors.password ? 'is-invalid' : ''}`}
           { ...register('password') }
         />

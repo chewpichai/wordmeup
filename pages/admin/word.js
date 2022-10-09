@@ -53,12 +53,12 @@ export default function Word() {
   return (
     <>
     <div className="mb-4">
-      <button className="btn btn-primary w-25" onClick={handleAddClick}>Add</button>
+      <button className="btn btn-primary" onClick={handleAddClick}>Add</button>
     </div>
 
-    <div className="table-responsive">
-      <table className="table">
-        <thead>
+    <div className="table-overflow">
+      <table className="table table-xl">
+        <thead className="thead-light">
           <tr className="text-center">
             <th scope="col">#</th>
             <th scope="col">Word</th>
@@ -79,7 +79,7 @@ export default function Word() {
             <td>{w.synonym}</td>
             <td>{w.types.map((t, i) => <div key={i}><small>{t}</small></div> )}</td>
             <td>
-              <button className="btn btn-sm btn-warning text-white" onClick={handleEditClick(w)}>
+              <button className="btn btn-icon btn-circle btn-warning" onClick={handleEditClick(w)}>
                 <i className="bi bi-pencil-square"></i>
               </button>
             </td>

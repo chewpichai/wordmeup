@@ -21,5 +21,5 @@ async function getList(req, res) {
   const newWords = await Word.find({ _id: { $nin: user.words.map(w => w.word) } })
   const shuffled = newWords.sort((a, b) => 0.5 - Math.random())
   const reviseWords = await Word.find({ _id: { $in: reviseWordIds } })
-  res.json([...shuffled.slice(0, 5), ...reviseWords])
+  res.json([...shuffled.slice(0, user.numPerDay), ...reviseWords])
 }

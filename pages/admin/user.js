@@ -58,12 +58,12 @@ export default function User() {
   return (
     <>
     <div className="mb-4">
-      <button className="btn btn-primary w-25" onClick={handleAddClick}>Add</button>
+      <button className="btn btn-primary pill" onClick={handleAddClick}>Add</button>
     </div>
 
-    <div className="table-responsive">
-      <table className="table">
-        <thead>
+    <div className="table-overflow">
+      <table className="table table-xl">
+        <thead className="thead-light">
           <tr className="text-center">
             <th scope="col">#</th>
             <th scope="col">Username</th>
@@ -92,7 +92,7 @@ export default function User() {
             <td>{moment(u.startDate).format('DD/MM/YY')}</td>
             <td>{moment(u.endDate).format('DD/MM/YY')}</td>
             <td>
-              <button className="btn btn-sm btn-warning text-white" onClick={handleEditClick(u)}>
+              <button className="btn btn-icon btn-circle btn-warning" onClick={handleEditClick(u)}>
                 <i className="bi bi-pencil-square"></i>
               </button>
             </td>

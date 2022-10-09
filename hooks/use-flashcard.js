@@ -8,10 +8,19 @@ export function useFlashCard() {
   const [finished, setFinished] = useState(false)
 
   useEffect(() => {
-    const uid = userService.userValue._id;
-    axios.get(`/api/user/${uid}/word`)
-      .then((response) => setWords(response.data))
+    loadWords(userService.userValue)
   }, [])
+
+  useEffect(() => {
+    const subscription = userService.user.subscribe(loadWords)
+  }, [])
+
+  function loadWords(user) {
+    if (!user?.numPerDay)
+      return
+    axios.get(`/api/user/${user._id}/word`)
+      .then(({ data: words }) => setWords(words))
+  }
 
   async function updateUserWord(date) {
     const data = {
