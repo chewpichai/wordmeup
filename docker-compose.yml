@@ -1,0 +1,25 @@
+version: "3.9"
+   
+services:
+  mongo:
+    image: mongo:latest
+    volumes:
+       - mongo_data:/data/db
+  mongo-express:
+    image: mongo-express:latest
+    depends_on:
+      - mongo
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=pass
+  wordmeup:
+    depends_on:
+      - mongo
+    build: .
+    ports:
+      - "3000:3000"
+      
+volumes:
+  mongo_data:
