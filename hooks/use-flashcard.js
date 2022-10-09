@@ -13,6 +13,7 @@ export function useFlashCard() {
 
   useEffect(() => {
     const subscription = userService.user.subscribe(loadWords)
+    return () => subscription.unsubscribe()
   }, [])
 
   function loadWords(user) {
