@@ -31,6 +31,7 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     $('.navbar-collapse.collapse').removeClass('show')
+    $('.navbar-toggler').addClass('collapsed')
   }, [authorized])
 
   function authCheck(url) {
