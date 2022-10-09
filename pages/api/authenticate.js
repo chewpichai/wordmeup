@@ -14,7 +14,7 @@ async function authenticate(req, res) {
   if (!user)
     return res.status(403).end('No username or password.')
   const now = new Date()
-  if (!user.isAdmin && user.startDate > now || now > user.endDate)
+  if (!user.isAdmin && (user.startDate > now || now > user.endDate))
     return res.status(403).end('Not in learning period.')
   const token = jwt.sign({ sub: user.id }, serverRuntimeConfig.secret, { expiresIn: '7d' })
   return res.status(200).json({ ...user._doc, token })

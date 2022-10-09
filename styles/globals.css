@@ -39,7 +39,7 @@ footer {
 }
 
 .modal-content {
-  background-color: #1f2251;
+  background-color: rgba(10, 18, 83, 0.98);
 }
 
 .modal-content .close {
