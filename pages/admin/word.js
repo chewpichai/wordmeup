@@ -79,7 +79,7 @@ export default function Word() {
             <td>{w.synonym}</td>
             <td>{w.types.map((t, i) => <div key={i}><small>{t}</small></div> )}</td>
             <td>
-              <button className="btn btn-icon btn-circle btn-warning" onClick={handleEditClick(w)}>
+              <button className="btn btn-xs btn-icon btn-circle btn-outline-warning" onClick={handleEditClick(w)}>
                 <i className="bi bi-pencil-square"></i>
               </button>
             </td>

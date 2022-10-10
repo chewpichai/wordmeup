@@ -92,7 +92,7 @@ export default function User() {
             <td>{moment(u.startDate).format('DD/MM/YY')}</td>
             <td>{moment(u.endDate).format('DD/MM/YY')}</td>
             <td>
-              <button className="btn btn-icon btn-circle btn-warning" onClick={handleEditClick(u)}>
+              <button className="btn btn-xs btn-icon btn-circle btn-outline-warning" onClick={handleEditClick(u)}>
                 <i className="bi bi-pencil-square"></i>
               </button>
             </td>

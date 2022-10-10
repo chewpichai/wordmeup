@@ -7,6 +7,7 @@ import moment from 'moment/moment'
 export default function Main() {
   const [isFliped, setIsFliped] = useState(false)
   const { words, word, currentIndex, handleNext, finished, nomore } = useFlashCard()
+  const isWebSpeech = 'speechSynthesis' in window
 
   useEffect(() => {
     if (userService.userValue.numPerDay)
@@ -30,6 +31,13 @@ export default function Main() {
     }
   }
 
+  function handleSpeechClick(word) {
+    if (!isWebSpeech)
+      return
+    const utter = new SpeechSynthesisUtterance(word)
+    window.speechSynthesis.speak(utter)
+  }
+
   if (finished)
     return <h3>See you tomorrow.</h3>
 
@@ -50,7 +58,16 @@ export default function Main() {
           </div>
 
           <div className="card">
-            <div className="card-header"><h5 className="text-center">{`${word.word} (${word.pos})`}</h5></div>
+            <div className="card-header">
+              <h5 className="text-center">{`${word.word} (${word.pos})`}</h5>
+              {isWebSpeech &&
+                <div className="text-center">
+                  <button className="btn btn-xs btn-icon btn-circle btn-secondary" onClick={() => handleSpeechClick(word.word)}>
+                    <i className="bi bi-volume-up-fill"></i>
+                  </button>
+                </div>
+              }
+            </div>
             <div className="card-body">
               <p className="text-center">{word.translation}</p>
             </div>
