@@ -6,7 +6,7 @@ import moment from 'moment/moment'
 
 export default function Main() {
   const [isFliped, setIsFliped] = useState(false)
-  const { words, word, currentIndex, handleNext, finished } = useFlashCard()
+  const { words, word, currentIndex, handleNext, finished, nomore } = useFlashCard()
 
   useEffect(() => {
     if (userService.userValue.numPerDay)
@@ -32,6 +32,9 @@ export default function Main() {
 
   if (finished)
     return <h3>See you tomorrow.</h3>
+
+  if (nomore)
+  return <h3>No more words to learn.</h3>
 
   return (
     <>

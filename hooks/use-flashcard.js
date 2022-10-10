@@ -6,6 +6,7 @@ export function useFlashCard() {
   const [words, setWords] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const [finished, setFinished] = useState(false)
+  const [nomore, setNomore] = useState(false)
 
   useEffect(() => {
     loadWords(userService.userValue)
@@ -20,7 +21,10 @@ export function useFlashCard() {
     if (!user?.numPerDay)
       return
     axios.get(`/api/user/${user._id}/word`)
-      .then(({ data: words }) => setWords(words))
+      .then(({ data: words }) => {
+        setNomore(words.length === 0)
+        setWords(words)
+      })
   }
 
   async function updateUserWord(date) {
@@ -42,8 +46,8 @@ export function useFlashCard() {
   }
 
   async function handleNext(date) {
+    await updateUserWord(date)
     if (currentIndex < words.length - 1) {
-      await updateUserWord(date)
       setCurrentIndex(i => i + 1)
     } else {
       setFinished(true)
@@ -56,5 +60,6 @@ export function useFlashCard() {
     currentIndex,
     handleNext,
     finished,
+    nomore,
   }
 } 
