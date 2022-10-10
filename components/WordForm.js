@@ -39,41 +39,40 @@ export function WordForm({ word, onSave }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="form-group">
-        <label htmlFor="word">Word</label>
         <input
-          type="text" id="word"
+          type="text" placeholder="Word"
           className={`form-control ${errors.word ? 'is-invalid' : ''}`}
           { ...register('word') }
         />
+        <div className="invalid-feedback">{errors.word?.message}</div>
       </div>
       <div className="form-group">
-        <label htmlFor="pos">POS</label>
         <input
-          type="text" id="pos"
+          type="text" placeholder="POS"
           className={`form-control ${errors.pos ? 'is-invalid' : ''}`}
           { ...register('pos') }
         />
+        <div className="invalid-feedback">{errors.pos?.message}</div>
       </div>
       <div className="form-group">
-        <label htmlFor="translation">Translation</label>
         <textarea
-          id="translation"
+          placeholder="Translation"
           className={`form-control ${errors.translation ? 'is-invalid' : ''}`}
           { ...register('translation') }
         />
+        <div className="invalid-feedback">{errors.translation?.message}</div>
       </div>
       <div className="form-group">
-        <label htmlFor="synonym">Synonym</label>
         <textarea
-          id="synonym"
+          placeholder="Synonym"
           className={`form-control ${errors.synonym ? 'is-invalid' : ''}`}
           { ...register('synonym') }
         />
+        <div className="invalid-feedback">{errors.synonym?.message}</div>
       </div>
       <div className="form-group">
-        <label htmlFor="type">Types</label>
         <select
-          multiple id="type"
+          multiple placeholder="Types"
           className={`form-control ${errors.types ? 'is-invalid' : ''}`}
           { ...register('types') }
         >
@@ -83,7 +82,10 @@ export function WordForm({ word, onSave }) {
         </select>
         <div className="invalid-feedback">{errors.types?.message}</div>
       </div>
-      <button type="submit" className="btn btn-primary w-100">Submit</button>
+      <button type="submit" className="btn btn-primary pill w-100" disabled={formState.isSubmitting}>
+        {formState.isSubmitting && <div className="spinner-border spinner-border-sm mr-1"/>}
+        Submit
+      </button>
     </form>
   )
 }

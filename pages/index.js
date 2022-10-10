@@ -36,6 +36,7 @@ export default function Home() {
           className={`form-control ${errors.username ? 'is-invalid' : ''}`}
           { ...register('username') }
         />
+        <div className="invalid-feedback">{errors.username?.message}</div>
       </div>
       <div className="form-group">
         <input
@@ -43,8 +44,12 @@ export default function Home() {
           className={`form-control ${errors.password ? 'is-invalid' : ''}`}
           { ...register('password') }
         />
+        <div className="invalid-feedback">{errors.password?.message}</div>
       </div>
-      <button type="submit" className="btn btn-primary w-100">Login</button>
+      <button type="submit" className="btn btn-primary pill w-100" disabled={formState.isSubmitting}>
+        {formState.isSubmitting && <div className="spinner-border spinner-border-sm mr-1"/>}
+        Login
+      </button>
     </form>
   )
 }

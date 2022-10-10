@@ -11,8 +11,8 @@ const INIT_USER = {
   email: '',
   course: '',
   courseType: 'CUTEP',
-  startDate: moment().format('YYYY-MM-DD'),
-  endDate: moment().format('YYYY-MM-DD'),
+  startDate: '',
+  endDate: '',
 }
 
 export default function User() {
@@ -62,7 +62,7 @@ export default function User() {
     </div>
 
     <div className="table-overflow">
-      <table className="table table-xl">
+      <table className="table">
         <thead className="thead-light">
           <tr className="text-center">
             <th scope="col">#</th>

@@ -53,11 +53,11 @@ export default function Word() {
   return (
     <>
     <div className="mb-4">
-      <button className="btn btn-primary" onClick={handleAddClick}>Add</button>
+      <button className="btn btn-primary pill" onClick={handleAddClick}>Add</button>
     </div>
 
     <div className="table-overflow">
-      <table className="table table-xl">
+      <table className="table">
         <thead className="thead-light">
           <tr className="text-center">
             <th scope="col">#</th>

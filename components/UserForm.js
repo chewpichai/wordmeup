@@ -49,55 +49,54 @@ export function UserForm({ user, onSave }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="form-group">
-        <label htmlFor="username">Username</label>
         <input
-          type="text" id="username"
+          type="text" placeholder="Username"
           className={`form-control ${errors.username ? 'is-invalid' : ''}`}
           { ...register('username') }
         />
+        <div className="invalid-feedback">{errors.username?.message}</div>
       </div>
       <div className="form-group">
-        <label htmlFor="password">Password</label>
         <input
-          type="text" id="password"
+          type="text" placeholder="Password"
           className={`form-control ${errors.password ? 'is-invalid' : ''}`}
           { ...register('password') }
         />
+        <div className="invalid-feedback">{errors.password?.message}</div>
       </div>
       <div className="form-group">
-        <label htmlFor="firstName">First Name</label>
         <input
-          type="text" id="firstName"
+          type="text" placeholder="First Name"
           className={`form-control ${errors.firstName ? 'is-invalid' : ''}`}
           { ...register('firstName') }
         />
+        <div className="invalid-feedback">{errors.firstName?.message}</div>
       </div>
       <div className="form-group">
-        <label htmlFor="lastName">Last Name</label>
         <input
-          type="text" id="lastName"
+          type="text" placeholder="Last Name"
           className={`form-control ${errors.lastName ? 'is-invalid' : ''}`}
           { ...register('lastName') }
         />
+        <div className="invalid-feedback">{errors.lastName?.message}</div>
       </div>
       <div className="form-group">
-        <label htmlFor="email">Email</label>
         <input
-          type="email" id="email"
+          type="email" placeholder="Email"
           className={`form-control ${errors.email ? 'is-invalid' : ''}`}
           { ...register('email') }
         />
+        <div className="invalid-feedback">{errors.email?.message}</div>
       </div>
       <div className="form-group">
-        <label htmlFor="course">Course</label>
         <input
-          type="text" id="course"
+          type="text" placeholder="Course"
           className={`form-control ${errors.course ? 'is-invalid' : ''}`}
           { ...register('course') }
         />
+        <div className="invalid-feedback">{errors.course?.message}</div>
       </div>
       <div className="form-group">
-        <label htmlFor="courseType">Course Type</label>
         <select
           className={`form-control ${errors.courseType ? 'is-invalid' : ''}`}
           { ...register('courseType') }
@@ -109,23 +108,26 @@ export function UserForm({ user, onSave }) {
         <div className="invalid-feedback">{errors.courseType?.message}</div>
       </div>
       <div className="form-group">
-        <label htmlFor="startDate">Start Date</label>
         <input
-          type="date" id="startDate"
+          type="date" placeholder="Start Date"
           className={`form-control ${errors.startDate ? 'is-invalid' : ''}`}
           { ...register('startDate') }
         />
+        <div className="invalid-feedback">{errors.startDate?.message}</div>
       </div>
       <div className="form-group">
-        <label htmlFor="endDate">End Date</label>
         <input
-          type="date" id="endDate"
+          type="date" placeholder="End Date"
           className={`form-control ${errors.endDate ? 'is-invalid' : ''}`}
           { ...register('endDate') }
         />
+        <div className="invalid-feedback">{errors.endDate?.message}</div>
       </div>
       <div className="text-right">
-        <button type="submit" className="btn btn-primary w-100">Submit</button>
+        <button type="submit" className="btn btn-primary pill w-100" disabled={formState.isSubmitting}>
+          {formState.isSubmitting && <div className="spinner-border spinner-border-sm mr-1"/>}
+          Submit
+        </button>
       </div>
     </form>
   )

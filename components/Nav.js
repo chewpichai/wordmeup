@@ -12,7 +12,7 @@ export function Nav() {
   }, [userService.userValue])
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light custom-menu menu-pills mb-4">
+    <nav className="navbar navbar-expand-md navbar-light custom-menu menu-pills mb-4">
       <div className="container">
         <Link className="navbar-brand" href="/">WORD ME UP</Link>
           
@@ -43,36 +43,12 @@ export function Nav() {
               </li>
             </>
             }
-            <li className="nav-item ml-lg-auto">
+            <li className="nav-item ml-md-auto">
               <a className="nav-link" href="#logout" onClick={userService.logout}>Logout</a>
             </li>
           </ul>
         </div>
       </div>
   </nav>
-  )
-
-  return (
-    <nav className="navbar navbar-expand-md navbar-light custom-menu menu-pills bg-white">
-      <Link className="navbar-brand" href="/">WORD ME UP</Link>
-      
-      <button className={`navbar-toggler ${user ? '' : 'd-none'}`} type="button" data-toggle="collapse" data-target="#navbarNav">
-        <span className="navbar-toggler-icon"></span>
-      </button>
-
-      <div className="collapse navbar-collapse" id="navbarNav">
-        <ul className={`navbar-nav flex-fill ${user ? '' : 'd-none'}`}>
-          <li className="nav-item">
-            {isAdmin ? <NavLink className="nav-link" href="/admin/user">User</NavLink> : <NavLink className="nav-link" href="/main">Main</NavLink>}
-          </li>
-          <li className="nav-item">
-            {isAdmin ? <NavLink className="nav-link" href="/admin/word">Word</NavLink> : <NavLink className="nav-link" href="/completed">Completed</NavLink>}
-          </li>
-          <li className="nav-item ml-md-auto">
-            <a className="nav-link" href="#logout" onClick={userService.logout}>Logout</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
   )
 }

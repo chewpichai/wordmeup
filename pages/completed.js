@@ -20,9 +20,9 @@ export default function Completed() {
     return <div className="text-center"><div className="spinner-border"/></div>
 
   return (
-    <div className="table-responsive">
+    <div className="table-overflow">
       <table className="table">
-        <thead>
+        <thead className="thead-light">
           <tr>
             <th scope="col">#</th>
             <th scope="col">Word</th>
