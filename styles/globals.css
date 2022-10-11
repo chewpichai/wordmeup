@@ -72,6 +72,10 @@ body .btn-xs.btn-icon:hover {
   line-height: 15px;
 }
 
+.navbar-brand {
+  max-height: 25px;
+}
+
 @media only screen and (min-width: 768px) {
   .navbar-expand-md.custom-menu.menu-pills .nav-link {
     padding: 12px 34px;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { NavLink, Link } from '.'
 import { userService } from 'services'
+import Image from 'next/image';
 
 export function Nav() {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -14,7 +15,7 @@ export function Nav() {
   return (
     <nav className="navbar navbar-expand-md navbar-light custom-menu menu-pills mb-4">
       <div className="container">
-        <Link className="navbar-brand" href="/">WORD ME UP</Link>
+        <Link className="navbar-brand" href="/"><Image src="/logo-wordmeup.png" width="182" height="25" /></Link>
           
         <button className={`navbar-toggler collapsed ${user ? '' : 'invisible'}`} type="button" data-toggle="collapse" data-target="#navbar-toggle-pills">
           <span className="icon-bar top-bar"></span>
