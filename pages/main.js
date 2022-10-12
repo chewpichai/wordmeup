@@ -32,10 +32,15 @@ export default function Main() {
   }
 
   function handleSpeechClick(word) {
-    if (!isWebSpeech)
-      return
-    const utter = new SpeechSynthesisUtterance(word)
-    window.speechSynthesis.speak(utter)
+    return (evt) => {
+      evt.stopPropagation()
+      if (!isWebSpeech)
+        return
+      const voice = window.speechSynthesis.getVoices().find(v => v.lang === 'en-GB')
+      const utter = new SpeechSynthesisUtterance(word)
+      utter.voice = voice
+      window.speechSynthesis.speak(utter)
+    }
   }
 
   if (finished)
@@ -53,28 +58,40 @@ export default function Main() {
         <ReactCardFlip isFlipped={isFliped} flipSpeedFrontToBack={1} flipDirection="horizontal">
           <div className="card" onClick={() => setIsFliped(true)}>
             <div className="card-body d-flex align-items-center">
-              <h5 className="text-center flex-fill">{`${word.word} (${word.pos})`}</h5>
+              <div className="flex-fill text-center">
+                <h5>{word.word}</h5>
+                {isWebSpeech &&
+                  <div>
+                    <button className="btn btn-xs btn-icon btn-circle btn-secondary" onClick={handleSpeechClick(word.word)}>
+                      <i className="bi bi-volume-up-fill"></i>
+                    </button>
+                  </div>
+                }
+              </div>
             </div>
           </div>
 
           <div className="card">
-            <div className="card-header">
-              <h5 className="text-center">{`${word.word} (${word.pos})`}</h5>
+            <div className="card-header text-center">
+              <h5>{word.word}</h5>
               {isWebSpeech &&
-                <div className="text-center">
-                  <button className="btn btn-xs btn-icon btn-circle btn-secondary" onClick={() => handleSpeechClick(word.word)}>
+                <div>
+                  <button className="btn btn-xs btn-icon btn-circle btn-secondary" onClick={handleSpeechClick(word.word)}>
                     <i className="bi bi-volume-up-fill"></i>
                   </button>
                 </div>
               }
             </div>
-            <div className="card-body">
-              <p className="text-center">{word.translation}</p>
+            <div className="card-body text-center">
+              <div>{word.pos}</div>
+              <p>{word.translation}</p>
+              <div className="font-weight-bold font-italic">Synonym</div>
+              <p>{word.synonym}</p>
             </div>
           </div>
         </ReactCardFlip>
 
-        <p className={`text-center mt-4 ${isFliped && 'invisible'}`}>Click to see answer.</p>
+        <p className={`text-center mt-4 ${isFliped && 'invisible'}`}>Tab the card to see the answer.</p>
 
         {isFliped &&
           <div className="row row-btn">

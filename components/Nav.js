@@ -40,7 +40,7 @@ export function Nav() {
                 <NavLink className="nav-link" href="/main">Main</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" href="/completed">Completed</NavLink>
+                <NavLink className="nav-link" href="/completed">My Completed Words</NavLink>
               </li>
             </>
             }
