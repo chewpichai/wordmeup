@@ -14,9 +14,8 @@ async function getList(req, res) {
     const words = await Word.find({ _id: { $in: completedWordIds } })
     return res.json(words)
   }
-  const now = moment()
   const reviseWordIds = user.words.filter(w => {
-    return !w.completed && now.isAfter(w.next)
+    return !w.completed && user.numRounds >= w.next
   }).map(w => w.word)
   const newWords = await Word.find({
     $and: [

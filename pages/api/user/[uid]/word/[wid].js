@@ -12,8 +12,10 @@ async function update(req, res) {
   const i = user.words.findIndex(w => w.word === word._id)
   const userWord = {
     word: word._id,
-      ...req.body
+    ...req.body
   }
+  if (req.body.next)
+    userWord.next += user.numRounds
   if (i === -1) {
     user.words.push(userWord)
   } else {

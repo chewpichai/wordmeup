@@ -11,11 +11,12 @@ const UserSchema = new mongoose.Schema({
   startDate: { type: Date },
   endDate: { type: Date },
   numPerDay: { type: Number, default: 0 },
+  numRounds: { type: Number, default: 0 },
   deleted: { type: Boolean, default: false },
   isAdmin: { type: Boolean, default: false },
   words: [{
     word: { type: mongoose.ObjectId, ref: 'Word'},
-    next: { type: Date },
+    next: { type: Number },
     completed: { type: Boolean, default: false },
   }],
 })

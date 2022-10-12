@@ -63,7 +63,7 @@ function MyApp({ Component, pageProps }) {
       <div className="container">
         {authorized && <Component {...pageProps} />}
       </div>
-      <footer className="text-center p-2 mt-4">Copyright &copy; 2012 By English-Me-Up Hybrid Education Co., Ltd. All Right Reserved</footer>
+      <footer className="text-center p-2 mt-4"><span className="d-none d-sm-inline">Copyright</span> &copy; 2012 By English-Me-Up Hybrid Education Co., Ltd. All Right Reserved</footer>
     </div>
     </>
   )

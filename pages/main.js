@@ -104,19 +104,19 @@ export default function Main() {
             <div className="col-12 col-sm px-sm-1">
               <button
                 className="btn btn-block btn-outline-primary pill mb-3"
-                onClick={handleButtonClick(moment().add(7, 'd'))}
+                onClick={handleButtonClick(7)}
               >Easy<br/><small>(7 days)</small></button>
             </div>
             <div className="col-12 col-sm px-sm-1">
               <button
                 className="btn btn-block btn-outline-secondary pill mb-3"
-                onClick={handleButtonClick(moment().add(3, 'd'))}
+                onClick={handleButtonClick(3)}
               >Medium<br/><small>(3 days)</small></button>
             </div>
             <div className="col-12 col-sm px-sm-1">
               <button
                 className="btn btn-block btn-outline-warning pill mb-3"
-                onClick={handleButtonClick(moment().add(1, 'd'))}
+                onClick={handleButtonClick(1)}
               >Difficult<br/><small>(Tomorrow)</small></button>
             </div>
             <div className="col-12 col-sm px-sm-1">

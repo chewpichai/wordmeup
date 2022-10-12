@@ -27,31 +27,37 @@ export function useFlashCard() {
       })
   }
 
-  async function updateUserWord(date) {
+  async function updateUserWord(next) {
     const data = {
       next: null,
       completed: false,
     }
-    if (date === 'again') {
+    if (next === 'again') {
       words.push(words[currentIndex])
       return
     }
-    if (date === 'clear')
+    if (next === 'clear')
       data.completed = true
     else
-      data.next = date
+      data.next = next
     const uid = userService.userValue._id
     const wid = words[currentIndex]._id
     await axios.put(`/api/user/${uid}/word/${wid}`, data)
   }
 
-  async function handleNext(date) {
-    await updateUserWord(date)
+  async function handleNext(next) {
+    await updateUserWord(next)
     if (currentIndex < words.length - 1) {
       setCurrentIndex(i => i + 1)
     } else {
-      setFinished(true)
+      handleFinish()
     }
+  }
+
+  async function handleFinish() {
+    const uid = userService.userValue._id
+    await axios.put(`/api/user/${uid}`, { finish: true })
+    setFinished(true)
   }
 
   return {
