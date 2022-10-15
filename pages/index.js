@@ -3,6 +3,8 @@ import * as Yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { userService } from 'services'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Home() {
   const validationSchema = Yup.object().shape({
@@ -19,17 +21,25 @@ export default function Home() {
       .then((user) => {
         if (user.isAdmin)
           return router.push('/admin/user')
-        const returnUrl = router.query.returnUrl || '/main'
+        const returnUrl = router.query.returnUrl || user.numPerDay ? '/' : '/howto'
         router.push(returnUrl)
       })
       .catch((err) => alert(err.response.data))
   }
 
-  if (userService.userValue)
-    return ''
+  if (userService.userValue) {
+    return (
+      <div className="text-center">
+        <h2>Welcome Back!</h2>
+        <p>New words are waiting for you.<br/>Ready?</p>
+        <button className="btn btn-sm btn-success-gradient"><Link href="/main">Yes</Link></button>
+      </div>
+    )
+  }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <>
+    <form className="mb-4" onSubmit={handleSubmit(onSubmit)}>
       <div className="form-group">
         <input
           type="text" placeholder="Username"
@@ -51,5 +61,8 @@ export default function Home() {
         Login
       </button>
     </form>
+
+    <Image src="/state-login.png" width="1140" height="619"/>
+    </>
   )
 }

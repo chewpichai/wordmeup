@@ -13,7 +13,7 @@ export function Nav() {
   }, [userService.userValue])
 
   return (
-    <nav className="navbar navbar-expand-md navbar-light custom-menu menu-pills mb-4">
+    <nav className="navbar navbar-expand-lg navbar-light custom-menu menu-pills mb-4">
       <div className="container">
         <Link className="navbar-brand" href="/"><Image src="/logo-wordmeup.png" width="182" height="25" /></Link>
           
@@ -42,9 +42,12 @@ export function Nav() {
               <li className="nav-item">
                 <NavLink className="nav-link" href="/completed">My Completed Words</NavLink>
               </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" href="/howto">How to Use</NavLink>
+              </li>
             </>
             }
-            <li className="nav-item ml-md-auto">
+            <li className="nav-item ml-lg-auto">
               <a className="nav-link" href="#logout" onClick={userService.logout}>Logout</a>
             </li>
           </ul>

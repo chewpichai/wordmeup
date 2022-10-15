@@ -3,6 +3,7 @@ import ReactCardFlip from 'react-card-flip'
 import { useFlashCard } from 'hooks'
 import { userService } from 'services'
 import moment from 'moment/moment'
+import Image from 'next/image'
 
 export default function Main() {
   const [isFliped, setIsFliped] = useState(false)
@@ -43,11 +44,18 @@ export default function Main() {
     }
   }
 
-  if (finished)
-    return <h3>See you tomorrow.</h3>
+  if (finished) {
+    return (
+      <div className="text-center">
+        <h2>Well Done!</h2>
+        <p>See you tomorrow.<br/>Keep Working and Achieve your Goal Together.</p>
+        <Image src="/state-finished.png" width="1140" height="760"/>
+      </div>
+    )
+  }
 
   if (nomore)
-  return <h3>No more words to learn.</h3>
+    return <h3>No more words to learn.</h3>
 
   return (
     <>
@@ -83,7 +91,7 @@ export default function Main() {
               }
             </div>
             <div className="card-body text-center">
-              <div>{word.pos}</div>
+              <div className="text-primary">{word.pos}</div>
               <p>{word.translation}</p>
               <div className="font-weight-bold font-italic">Synonym</div>
               <p>{word.synonym}</p>

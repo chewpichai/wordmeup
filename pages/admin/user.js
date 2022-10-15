@@ -52,6 +52,20 @@ export default function User() {
     }
   }
 
+  function handleDeleteClick(user) {
+    return () => {
+      axios.delete(`/api/user/${user._id}`)
+        .then(() => {
+          setUsers(prev => {
+            const i = prev.findIndex(u => u._id === user._id)
+            if (i !== -1)
+              prev.splice(i, 1)
+            return [...prev]
+          })
+        })
+    }
+  }
+
   if (loading)
     return <div className="text-center"><div className="spinner-border"/></div>
 
@@ -92,8 +106,11 @@ export default function User() {
             <td>{moment(u.startDate).format('DD/MM/YY')}</td>
             <td>{moment(u.endDate).format('DD/MM/YY')}</td>
             <td>
-              <button className="btn btn-xs btn-icon btn-circle btn-outline-warning" onClick={handleEditClick(u)}>
+              <button className="btn btn-xs btn-icon btn-circle btn-outline-warning m-1" onClick={handleEditClick(u)}>
                 <i className="bi bi-pencil-square"></i>
+              </button>
+              <button className="btn btn-xs btn-icon btn-circle btn-outline-danger m-1" onClick={handleDeleteClick(u)}>
+                <i className="bi bi-trash-fill"></i>
               </button>
             </td>
           </tr>
