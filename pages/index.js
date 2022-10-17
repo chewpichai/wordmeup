@@ -30,9 +30,10 @@ export default function Home() {
   if (userService.userValue) {
     return (
       <div className="text-center">
-        <h2>Welcome Back!</h2>
-        <p>New words are waiting for you.<br/>Ready?</p>
-        <button className="btn btn-sm btn-success-gradient"><Link href="/main">Yes</Link></button>
+        <h5>Welcome Back!</h5>
+        <div className="d-flex my-4 text-lobby">
+          <p className="flex-fill align-self-center">New words are waiting for you.<br/>Ready?<br/><button className="btn btn-sm btn-success-gradient mt-2"><Link href="/main">Yes</Link></button></p>
+        </div>
       </div>
     )
   }
