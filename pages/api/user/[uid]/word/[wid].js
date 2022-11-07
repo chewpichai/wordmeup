@@ -9,7 +9,7 @@ export default apiHandler({
 async function update(req, res) {
   const user = await User.findById(req.query.uid)
   const word = await Word.findById(req.query.wid)
-  const i = user.words.findIndex(w => w.word === word._id)
+  const i = user.words.findIndex(w => w.word.equals(word._id))
   const userWord = {
     word: word._id,
     ...req.body

@@ -38,10 +38,12 @@ form {
 }
 
 .react-card-flipper .card {
-  height: 330px;
+  height: 440px;
   width: 330px;
   margin: 0 auto;
   background-image: url('/bg-card.png');
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .react-card-front .card{

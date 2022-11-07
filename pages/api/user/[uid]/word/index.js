@@ -14,9 +14,7 @@ async function getList(req, res) {
     const words = await Word.find({ _id: { $in: completedWordIds } })
     return res.json(words)
   }
-  const reviseWordIds = user.words.filter(w => {
-    return !w.completed && user.numRounds >= w.next
-  }).map(w => w.word)
+  const reviseWordIds = user.words.filter(w => !w.completed && user.numRounds >= w.next).map(w => w.word)
   const newWords = await Word.find({
     $and: [
       { _id: { $nin: user.words.map(w => w.word) } },

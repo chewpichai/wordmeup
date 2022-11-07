@@ -61,7 +61,7 @@ export default function Main() {
     <>
     {word ?
       <>
-        <div className="text-right mb-4">{`${currentIndex}/${words.length}`}</div>
+        <div className="text-right mb-4">{`${currentIndex + 1}/${words.length}`}</div>
 
         <ReactCardFlip isFlipped={isFliped} flipSpeedFrontToBack={1} flipDirection="horizontal">
           <div className="card" onClick={() => setIsFliped(true)}>
