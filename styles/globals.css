@@ -8,7 +8,7 @@ html, body {
 }
 
 .app > .container {
-  min-height: calc(100vh - 153px);
+  min-height: calc(100vh - 105px);
 }
 
 a {
@@ -80,9 +80,9 @@ body .btn-xs.btn-icon:hover {
 }
 
 .navbar-expand-lg .navbar-brand {
-  height: 50px;
-  width: 125px;
-  max-height: 50px;
+  height: 60px;
+  width: 158px;
+  max-height: 60px;
 }
 
 footer {
@@ -111,4 +111,11 @@ footer {
 
 .text-lobby p {
   font-size: 0.8rem;
+}
+
+
+@media only screen and (min-width: 992px) {
+  .navbar-expand-lg.custom-menu.menu-pills {
+    padding: 0;
+  }
 }

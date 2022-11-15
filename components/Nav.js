@@ -13,9 +13,9 @@ export function Nav() {
   }, [userService.userValue])
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light custom-menu menu-pills mb-4">
+    <nav className="navbar navbar-expand-lg navbar-light custom-menu menu-pills">
       <div className="container">
-        <Link className="navbar-brand" href="/"><Image src="/logo-wordmeup.png" width="125" height="50" layout="responsive"/></Link>
+        <Link className="navbar-brand" href="/"><Image src="/logo-wordmeup.png" width="197" height="75" layout="responsive"/></Link>
           
         <button className={`navbar-toggler collapsed ${user ? '' : 'invisible'}`} type="button" data-toggle="collapse" data-target="#navbar-toggle-pills">
           <span className="icon-bar top-bar"></span>

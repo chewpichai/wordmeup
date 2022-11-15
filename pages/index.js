@@ -40,7 +40,7 @@ export default function Home() {
 
   return (
     <>
-    <form className="mb-4" onSubmit={handleSubmit(onSubmit)}>
+    <form className="mb-3" onSubmit={handleSubmit(onSubmit)}>
       <div className="form-group">
         <input
           type="text" placeholder="Username"
@@ -63,7 +63,9 @@ export default function Home() {
       </button>
     </form>
 
-    <Image src="/state-login.png" width="1140" height="619"/>
+    <div className="text-center">
+      <Image src="/state-login.png" width="737" height="400"/>
+    </div>
     </>
   )
 }

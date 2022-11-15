@@ -49,7 +49,7 @@ export default function Main() {
       <div className="text-center">
         <h2>Well Done!</h2>
         <p>See you tomorrow.<br/>Keep Working and Achieve your Goal Together.</p>
-        <Image src="/state-finished.png" width="1140" height="760"/>
+        <Image src="/state-finished.png" width="810" height="540"/>
       </div>
     )
   }
@@ -67,7 +67,7 @@ export default function Main() {
           <div className="card" onClick={() => setIsFliped(true)}>
             <div className="card-body d-flex align-items-center">
               <div className="flex-fill text-center">
-                <h5>{word.word}</h5>
+                <h4>{word.word}</h4>
                 {isWebSpeech &&
                   <div>
                     <button className="btn btn-xs btn-icon btn-circle btn-secondary" onClick={handleSpeechClick(word.word)}>
@@ -81,19 +81,21 @@ export default function Main() {
 
           <div className="card">
             <div className="card-header text-center">
-              <h5>{word.word}</h5>
-              {isWebSpeech &&
-                <div>
-                  <button className="btn btn-xs btn-icon btn-circle btn-secondary" onClick={handleSpeechClick(word.word)}>
-                    <i className="bi bi-volume-up-fill"></i>
-                  </button>
-                </div>
-              }
+              <h4>
+                {word.word}
+                {isWebSpeech &&
+                  <div className="d-inline ml-2">
+                    <button className="btn btn-xs btn-icon btn-circle btn-secondary" onClick={handleSpeechClick(word.word)}>
+                      <i className="bi bi-volume-up-fill"></i>
+                    </button>
+                  </div>
+                }
+              </h4>
+              <div className="text-primary">{word.pos}</div>
             </div>
             <div className="card-body text-center">
-              <div className="text-primary">{word.pos}</div>
               <p>{word.translation}</p>
-              <div className="font-weight-bold font-italic">Synonym</div>
+              <div className="font-weight-bold" style={{color:'black'}}>Synonym</div>
               <p>{word.synonym}</p>
             </div>
           </div>
@@ -141,21 +143,27 @@ export default function Main() {
     }
 
     <div id="modal-form" className="modal">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Please choose your preference</h5>
-            </div>
-            <div className="modal-body">
-              <form onSubmit={handleSettingSubmit}>
-                <div className="form-group">
-                  <input type="number" placeholder="New words / day" name="numPerDay" className="form-control"/>
-                </div>
-                <button className="btn btn-primary w-100">Start</button>
-              </form>
-            </div>
+      <div className="modal-dialog">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title text-center" style={{color:'blue'}}>
+              How many <span style={{color:'red'}}>words</span> per day do you want to memorize?<br/>
+              <small style={{color:'gray', fontSize:'0.95rem'}}>กรุณาระบุจำนวนคำศัพท์ที่ต้องการท่องต่อวัน (ไม่สามารถเปลี่ยนได้)</small>
+            </h5>
+          </div>
+          <div className="modal-body">
+            <form onSubmit={handleSettingSubmit}>
+              <div className="form-group">
+                <input type="number" placeholder="New words / day" name="numPerDay" className="form-control"/>
+              </div>
+              <button className="btn btn-primary w-100">Start</button>
+            </form>
           </div>
         </div>
+      </div>
+      <div className="text-center pt-4">
+        <Image src="/state-setnums.png" width="360" height="253"/>
+      </div>
     </div>
     </>
   )
