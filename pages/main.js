@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 import ReactCardFlip from 'react-card-flip'
 import { useFlashCard } from 'hooks'
 import { userService } from 'services'
-import moment from 'moment/moment'
 import Image from 'next/image'
 
 export default function Main() {
+  const [isStarted, setIsStarted] = useState(false)
   const [isFliped, setIsFliped] = useState(false)
   const { words, word, currentIndex, handleNext, finished, nomore } = useFlashCard()
   const isWebSpeech = 'speechSynthesis' in window
@@ -22,6 +22,7 @@ export default function Main() {
     userService.update(userService.userValue._id, { numPerDay: data.get('numPerDay') })
       .then(() => {
         $('#modal-form').modal('hide')
+        setIsStarted(true)
       })
   }
 
@@ -42,6 +43,20 @@ export default function Main() {
       utter.voice = voice
       window.speechSynthesis.speak(utter)
     }
+  }
+
+  if (userService.userValue.numPerDay && !isStarted) {
+    return (
+      <div className="text-center">
+        <h5>Welcome Back!</h5>
+        <div className="d-flex my-4 text-lobby">
+          <p className="flex-fill align-self-center">
+            New words are waiting for you.<br/>Ready?<br/>
+            <button className="btn btn-sm btn-success-gradient mt-2" onClick={() => setIsStarted(true)}>Yes</button>
+          </p>
+        </div>
+      </div>
+    )
   }
 
   if (finished) {

@@ -3,7 +3,6 @@ import * as Yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { userService } from 'services'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 import Image from 'next/image'
 
 export default function Home() {
@@ -21,21 +20,10 @@ export default function Home() {
       .then((user) => {
         if (user.isAdmin)
           return router.push('/admin/user')
-        const returnUrl = router.query.returnUrl || user.numPerDay ? '/' : '/howto'
+        const returnUrl = router.query.returnUrl || user.numPerDay ? '/main' : '/howto'
         router.push(returnUrl)
       })
       .catch((err) => alert(err.response.data))
-  }
-
-  if (userService.userValue) {
-    return (
-      <div className="text-center">
-        <h5>Welcome Back!</h5>
-        <div className="d-flex my-4 text-lobby">
-          <p className="flex-fill align-self-center">New words are waiting for you.<br/>Ready?<br/><button className="btn btn-sm btn-success-gradient mt-2"><Link href="/main">Yes</Link></button></p>
-        </div>
-      </div>
-    )
   }
 
   return (

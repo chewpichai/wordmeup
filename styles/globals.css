@@ -46,7 +46,11 @@ form {
   background-position: center;
 }
 
-.react-card-front .card{
+.react-card-flipper .card .card-header {
+  margin-top: 40px;
+}
+
+.react-card-front .card {
   cursor: pointer;
 }
 
@@ -86,17 +90,7 @@ body .btn-xs.btn-icon:hover {
 }
 
 footer {
-  font-size: 0.6rem;
-}
-
-.text-howto {
-  height: 200px;
-  background-image: url('/state-howto.png');
-  background-repeat: no-repeat;
-  padding-left: 130px;
-  max-width: 440px;
-  margin-right: auto;
-  margin-left: auto;
+  font-size: 0.55rem;
 }
 
 .text-lobby {
