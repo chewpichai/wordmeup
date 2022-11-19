@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Howto() {
   return (
     <>
-    <div className="embed-responsive embed-responsive-16by9 my-2">
+    <div className="embed-responsive embed-responsive-16by9 my-2 mx-auto" style={{maxWidth:640}}>
       <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/ehrhk1lizM8" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
     <div className="text-center">

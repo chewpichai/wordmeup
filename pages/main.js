@@ -116,10 +116,10 @@ export default function Main() {
           </div>
         </ReactCardFlip>
 
-        <p className={`text-center mt-4 ${isFliped && 'invisible'}`}>Tab the card to see the answer.</p>
+        <p className={`text-center mt-4 ${isFliped && 'hidden'}`}>Tab the card to see the answer.</p>
 
         {isFliped &&
-          <div className="row row-btn">
+          <div className="row row-btn mt-4">
             <div className="col-12 col-sm px-sm-1">
               <button
                 className="btn btn-block btn-outline-success pill mb-3"
