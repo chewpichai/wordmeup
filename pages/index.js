@@ -20,8 +20,7 @@ export default function Home() {
       .then((user) => {
         if (user.isAdmin)
           return router.push('/admin/user')
-        const returnUrl = router.query.returnUrl || user.numPerDay ? '/main' : '/howto'
-        router.push(returnUrl)
+        router.push('/main')
       })
       .catch((err) => alert(err.response.data))
   }

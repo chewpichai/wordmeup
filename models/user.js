@@ -12,6 +12,7 @@ const UserSchema = new mongoose.Schema({
   endDate: { type: Date },
   numPerDay: { type: Number, default: 0 },
   numRounds: { type: Number, default: 0 },
+  showHowto: { type: Boolean, default: true },
   deleted: { type: Boolean, default: false },
   isAdmin: { type: Boolean, default: false },
   words: [{

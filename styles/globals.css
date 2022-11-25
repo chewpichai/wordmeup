@@ -28,6 +28,36 @@ form {
   height: 75px;
 }
 
+.card-num-days {
+  max-width: 520px;
+}
+
+.modal-howto {
+  margin-top: 80px;
+}
+
+.modal-howto .modal-body {
+  position: relative;
+}
+
+.modal-howto .modal-body p {
+  font-size: 1.85rem;
+}
+
+.modal-howto .modal-body i {
+  cursor: pointer;
+}
+
+.modal-howto .close {
+  cursor: pointer;
+  padding: 0;
+  position: absolute;
+  font-size: 2rem;
+  right: 24px;
+  top: 24px;
+  color: white;
+}
+
 .modal-header .close {
   display: block !important;
   padding-top: 0;
@@ -94,23 +124,15 @@ footer {
   right: 0;
 }
 
-.text-lobby {
-  height: 200px;
-  background-image: url('/state-lobby.png');
-  background-repeat: no-repeat;
-  padding-left: 130px;
-  max-width: 340px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.text-lobby p {
-  font-size: 0.8rem;
-}
-
 
 @media only screen and (min-width: 992px) {
   .navbar-expand-lg.custom-menu.menu-pills {
     padding: 0;
+  }
+}
+
+@media print {
+  .hide-print {
+    display: none !important;
   }
 }

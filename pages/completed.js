@@ -21,6 +21,9 @@ export default function Completed() {
 
   return (
     <div className="table-overflow">
+      <div className="d-flex flex-row-reverse mb-4 hide-print">
+        <button className="btn btn-icon btn-circle btn-outline-primary" onClick={() => window.print()}><i className="bi bi-printer-fill"></i></button>
+      </div>
       <table className="table">
         <thead className="thead-light">
           <tr>

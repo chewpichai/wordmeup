@@ -3,17 +3,18 @@ import ReactCardFlip from 'react-card-flip'
 import { useFlashCard } from 'hooks'
 import { userService } from 'services'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 export default function Main() {
   const [isStarted, setIsStarted] = useState(false)
   const [isFliped, setIsFliped] = useState(false)
   const { words, word, currentIndex, handleNext, finished, nomore } = useFlashCard()
   const isWebSpeech = 'speechSynthesis' in window
+  const router = useRouter()
 
   useEffect(() => {
-    if (userService.userValue.numPerDay)
-      return
-    $('#modal-form').modal({backdrop: 'static', keyboard: false}).modal('show')
+    if (userService.userValue.showHowto)
+      $('#modal-form').modal({backdrop: 'static', keyboard: false}).modal('show')
   }, [])
 
   function handleSettingSubmit(evt) {
@@ -21,9 +22,18 @@ export default function Main() {
     const data = new FormData(evt.target)
     userService.update(userService.userValue._id, { numPerDay: data.get('numPerDay') })
       .then(() => {
-        $('#modal-form').modal('hide')
         setIsStarted(true)
       })
+  }
+
+  async function handleCloseClick() {
+    $('#modal-form').modal('hide')
+    await userService.update(userService.userValue._id, { showHowto: false })
+  }
+
+  async function handlePlayClick() {
+    await handleCloseClick()
+    router.push('/howto')
   }
 
   function handleButtonClick(date) {
@@ -45,15 +55,62 @@ export default function Main() {
     }
   }
 
+  if (!userService.userValue.numPerDay) {
+    return (
+      <>
+      <div className="card card-num-days mx-auto">
+        <div className="card-header">
+          <h5 className="modal-title text-center" style={{color:'blue'}}>
+            How many <span style={{color:'red'}}>words</span> per day do you want to memorize?<br/>
+            <small style={{color:'gray', fontSize:'0.95rem'}}>กรุณาระบุจำนวนคำศัพท์ที่ต้องการท่องต่อวัน (ไม่สามารถเปลี่ยนได้)</small>
+          </h5>
+        </div>
+        <div className="card-body">
+          <form onSubmit={handleSettingSubmit}>
+            <div className="form-group">
+              <input type="number" placeholder="New words / day" name="numPerDay" className="form-control"/>
+            </div>
+            <button className="btn btn-primary w-100">Start</button>
+          </form>
+        </div>
+      </div>
+
+      <div className="text-center pt-4">
+        <Image src="/state-setnums.png" width="600" height="421"/>
+      </div>
+
+      <div id="modal-form" className="modal modal-howto">
+        <div className="modal-dialog">
+          <div className="modal-content bg-danger">
+            <div className="modal-body">
+              <button type="button" className="close" onClick={handleCloseClick}>
+                <span>&times;</span>
+              </button>
+              <p className="text-white">
+                สำหรับการใช้งานครั้งแรก<br/>กดรับชมวิธีการใช้งานที่นี่ครับ&nbsp;
+                <i className="bi bi-play-circle-fill" onClick={handlePlayClick}></i>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      </>
+    )
+  }
+
   if (userService.userValue.numPerDay && !isStarted) {
     return (
       <div className="text-center">
-        <h5>Welcome Back!</h5>
+        <h4>Welcome Back!</h4>
         <div className="d-flex my-4 text-lobby">
           <p className="flex-fill align-self-center">
             New words are waiting for you.<br/>Ready?<br/>
             <button className="btn btn-sm btn-success-gradient mt-2" onClick={() => setIsStarted(true)}>Yes</button>
           </p>
+        </div>
+
+        <div className="text-center">
+          <Image src="/state-login.png" width="737" height="400"/>
         </div>
       </div>
     )
@@ -156,30 +213,6 @@ export default function Main() {
       :
       <div className="text-center"><div className="spinner-border"/></div>
     }
-
-    <div id="modal-form" className="modal">
-      <div className="modal-dialog">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title text-center" style={{color:'blue'}}>
-              How many <span style={{color:'red'}}>words</span> per day do you want to memorize?<br/>
-              <small style={{color:'gray', fontSize:'0.95rem'}}>กรุณาระบุจำนวนคำศัพท์ที่ต้องการท่องต่อวัน (ไม่สามารถเปลี่ยนได้)</small>
-            </h5>
-          </div>
-          <div className="modal-body">
-            <form onSubmit={handleSettingSubmit}>
-              <div className="form-group">
-                <input type="number" placeholder="New words / day" name="numPerDay" className="form-control"/>
-              </div>
-              <button className="btn btn-primary w-100">Start</button>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div className="text-center pt-4">
-        <Image src="/state-setnums.png" width="360" height="253"/>
-      </div>
-    </div>
     </>
   )
 }
