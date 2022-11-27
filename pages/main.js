@@ -33,7 +33,7 @@ export default function Main() {
 
   async function handlePlayClick() {
     await handleCloseClick()
-    router.push('/howto')
+    $('#modal-video').modal('show')
   }
 
   function handleButtonClick(date) {
@@ -60,8 +60,8 @@ export default function Main() {
       <>
       <div className="card card-num-days mx-auto">
         <div className="card-header">
-          <h5 className="modal-title text-center" style={{color:'blue'}}>
-            How many <span style={{color:'red'}}>words</span> per day do you want to memorize?<br/>
+          <h5 className="modal-title text-center text-primary">
+            How many <span className="text-danger">words</span> per day do you want to memorize?<br/>
             <small style={{color:'gray', fontSize:'0.95rem'}}>กรุณาระบุจำนวนคำศัพท์ที่ต้องการท่องต่อวัน (ไม่สามารถเปลี่ยนได้)</small>
           </h5>
         </div>
@@ -101,11 +101,11 @@ export default function Main() {
   if (userService.userValue.numPerDay && !isStarted) {
     return (
       <div className="text-center">
-        <h4>Welcome Back!</h4>
+        <h1>Welcome Back!</h1>
         <div className="d-flex my-4 text-lobby">
           <p className="flex-fill align-self-center">
-            New words are waiting for you.<br/>Ready?<br/>
-            <button className="btn btn-sm btn-success-gradient mt-2" onClick={() => setIsStarted(true)}>Yes</button>
+            New <span className="text-danger">words</span> are waiting for you.<br/><br/>
+            <button className="btn btn-sm btn-primary-gradient mt-2" onClick={() => setIsStarted(true)}>Ready</button>
           </p>
         </div>
 
@@ -167,7 +167,7 @@ export default function Main() {
             </div>
             <div className="card-body text-center">
               <p>{word.translation}</p>
-              <div className="font-weight-bold" style={{color:'black'}}>Synonym</div>
+              <div className="font-weight-bold text-black">Synonym</div>
               <p>{word.synonym}</p>
             </div>
           </div>

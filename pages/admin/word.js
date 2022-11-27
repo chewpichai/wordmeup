@@ -35,6 +35,20 @@ export default function Word() {
     }
   }
 
+  function handleDeleteClick(word) {
+    return () => {
+      axios.delete(`/api/word/${word._id}`)
+        .then(() => {
+          setWords(prev => {
+            const i = prev.findIndex(w => w._id === word._id)
+            if (i !== -1)
+              prev.splice(i, 1)
+            return [...prev]
+          })
+        })
+    }
+  }
+
   function handleSave(word) {
     setWords(prev => {
       const i = prev.findIndex(w => w._id === word._id)
@@ -79,8 +93,11 @@ export default function Word() {
             <td>{w.synonym}</td>
             <td>{w.types.map((t, i) => <div key={i}><small>{t}</small></div> )}</td>
             <td>
-              <button className="btn btn-xs btn-icon btn-circle btn-outline-warning" onClick={handleEditClick(w)}>
+              <button className="btn btn-xs btn-icon btn-circle btn-outline-warning m-1" onClick={handleEditClick(w)}>
                 <i className="bi bi-pencil-square"></i>
+              </button>
+              <button className="btn btn-xs btn-icon btn-circle btn-outline-danger m-1" onClick={handleDeleteClick(w)}>
+                <i className="bi bi-trash-fill"></i>
               </button>
             </td>
           </tr>

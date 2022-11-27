@@ -43,7 +43,7 @@ export function Nav() {
                 <NavLink className="nav-link" href="/completed">My Completed Words</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" href="/howto">How to Use</NavLink>
+                <a className="nav-link" onClick={() => $('#modal-video').modal('show')}>How to Use</a>
               </li>
             </>
             }
@@ -53,6 +53,21 @@ export function Nav() {
           </ul>
         </div>
       </div>
-  </nav>
+
+      <div id="modal-video" className="modal modal-video">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-body">
+              <button type="button" className="close" data-dismiss="modal">
+                <span>&times;</span>
+              </button>
+              <div className="embed-responsive embed-responsive-16by9 my-2 mx-auto" style={{maxWidth:640}}>
+                <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/ehrhk1lizM8" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
   )
 }
