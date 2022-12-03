@@ -72,7 +72,7 @@ export default function User() {
   return (
     <>
     <div className="mb-4">
-      <button className="btn btn-primary pill" onClick={handleAddClick}>Add</button>
+      <button className="btn btn-icon btn-circle btn-outline-primary" onClick={handleAddClick}><i className="bi bi-plus-lg"></i></button>
     </div>
 
     <div className="table-overflow">

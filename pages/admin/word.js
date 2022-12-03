@@ -14,6 +14,7 @@ export default function Word() {
   const [words, setWords] = useState([])
   const [loading, setLoading] = useState(true)
   const [editingWord, setEditingWord] = useState(INIT_WORD)
+  const [wordType, setWordType] = useState('CUTEP')
 
   useEffect(() => {
     axios.get('/api/word')
@@ -66,8 +67,15 @@ export default function Word() {
 
   return (
     <>
-    <div className="mb-4">
-      <button className="btn btn-primary pill" onClick={handleAddClick}>Add</button>
+    <div className="d-flex align-items-center mb-4">
+      <button className="btn btn-icon btn-circle btn-outline-primary" onClick={handleAddClick}><i className="bi bi-plus-lg"></i></button>
+      <div className="ml-auto col-xs-12">
+        <select class="custom-select" onChange={(evt) => setWordType(evt.target.value)}>
+          <option>CUTEP</option>
+          <option>TOEIC</option>
+          <option>IELTS</option>
+        </select>
+      </div>
     </div>
 
     <div className="table-overflow">
@@ -84,7 +92,7 @@ export default function Word() {
           </tr>
         </thead>
         <tbody>
-        {words.map((w, i) =>
+        {words.filter((w) => w.types.includes(wordType)).map((w, i) =>
           <tr key={i}>
             <th scope="row">{i + 1}</th>
             <td>{w.word}</td>

@@ -5,13 +5,15 @@ import { userService } from 'services'
 export default function Completed() {
   const [loading, setLoading] = useState(true)
   const [words, setWords] = useState([])
+  const [total, setTotal] = useState('')
 
   useEffect(() => {
     const uid = userService.userValue._id
     const params = { status: 'completed' }
     axios.get(`/api/user/${uid}/word`, { params })
       .then((response) => {
-        setWords(response.data)
+        setWords(response.data.words)
+        setTotal(response.data.total)
         setLoading(false)
       })
   }, [])
@@ -21,8 +23,9 @@ export default function Completed() {
 
   return (
     <div className="table-overflow">
-      <div className="d-flex flex-row-reverse mb-4 hide-print">
-        <button className="btn btn-icon btn-circle btn-outline-primary" onClick={() => window.print()}><i className="bi bi-printer-fill"></i></button>
+      <div className="d-flex flex-row-reverse align-items-center mb-4 hide-print">
+        <button className="btn btn-icon btn-circle btn-outline-primary ml-4" onClick={() => window.print()}><i className="bi bi-printer-fill"></i></button>
+        <span>{total}</span>
       </div>
       <table className="table">
         <thead className="thead-light">
