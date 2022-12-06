@@ -128,7 +128,7 @@ export default function Main() {
   if (finished)
     return (
       <div className="d-flex justify-content-center">
-        <div className="mx-2"><Image src="/state-howto.png" width="220" height="475"/></div>
+        <div className="mx-2 d-none d-md-block"><Image src="/state-howto.png" width="220" height="475"/></div>
         <div className="mx-2 ipad">
           <h4 className="mb-2">Until today</h4>
           <p>You firmly memorized <span className="text-danger">{stat.completed}</span> words.</p>

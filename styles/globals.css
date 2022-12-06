@@ -131,12 +131,17 @@ footer {
 }
 
 .ipad {
-  border: 10px solid black;
-  border-bottom-width: 24px;
-  border-radius: 8px;
-  padding: 1rem;
-  padding-top: 6rem;
   text-align: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .ipad {
+    border: 10px solid black;
+    border-bottom-width: 24px;
+    border-radius: 8px;
+    padding: 1rem;
+    padding-top: 6rem;
+  }
 }
 
 @media only screen and (min-width: 992px) {
