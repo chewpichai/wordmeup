@@ -130,6 +130,15 @@ footer {
   line-height: 2rem;
 }
 
+.ipad {
+  border: 10px solid black;
+  border-bottom-width: 24px;
+  border-radius: 8px;
+  padding: 1rem;
+  padding-top: 6rem;
+  text-align: center;
+}
+
 @media only screen and (min-width: 992px) {
   .navbar-expand-lg.custom-menu.menu-pills {
     padding: 0;

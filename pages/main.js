@@ -3,14 +3,13 @@ import ReactCardFlip from 'react-card-flip'
 import { useFlashCard } from 'hooks'
 import { userService } from 'services'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
 
 export default function Main() {
   const [isStarted, setIsStarted] = useState(false)
   const [isFliped, setIsFliped] = useState(false)
-  const { words, word, currentIndex, handleNext, finished, nomore } = useFlashCard()
+  const { words, word, currentIndex, handleNext, finished, nomore, stat } = useFlashCard()
   const isWebSpeech = 'speechSynthesis' in window
-  const router = useRouter()
+  const [sessionEnded, setSessionEnded] = useState(false)
 
   useEffect(() => {
     if (userService.userValue.showHowto)
@@ -116,15 +115,28 @@ export default function Main() {
     )
   }
 
-  if (finished) {
+  if (sessionEnded)
     return (
       <div className="text-center">
         <h2>Well Done!</h2>
         <p>See you tomorrow.<br/>Keep Working and Achieve your Goal Together.</p>
+        <div><button className="btn btn-primary-gradient mt-2" onClick={userService.logout}>END</button></div>
         <Image src="/state-finished.png" width="810" height="540"/>
       </div>
     )
-  }
+
+  if (finished)
+    return (
+      <div className="d-flex justify-content-center">
+        <div className="mx-2"><Image src="/state-howto.png" width="220" height="475"/></div>
+        <div className="mx-2 ipad">
+          <h4 className="mb-2">Until today</h4>
+          <p>You firmly memorized <span className="text-danger">{stat.completed}</span> words.</p>
+          <p>You still have <span className="text-danger">{stat.totalWords}</span> words to fight for.</p>
+          <button className="btn btn-primary-gradient mt-2" onClick={() => setSessionEnded(true)}>NEXT</button>
+        </div>
+      </div>
+    )
 
   if (nomore)
     return <h3>No more words to learn.</h3>

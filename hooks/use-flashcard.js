@@ -7,6 +7,7 @@ export function useFlashCard() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [finished, setFinished] = useState(false)
   const [nomore, setNomore] = useState(false)
+  const [stat, setStat] = useState({})
 
   useEffect(() => {
     loadWords(userService.userValue)
@@ -57,6 +58,8 @@ export function useFlashCard() {
   async function handleFinish() {
     const uid = userService.userValue._id
     await axios.put(`/api/user/${uid}`, { finish: true })
+    const res = await axios.get(`/api/user/${uid}/stat`)
+    setStat(res.data)
     setFinished(true)
   }
 
@@ -67,5 +70,6 @@ export function useFlashCard() {
     handleNext,
     finished,
     nomore,
+    stat,
   }
 } 

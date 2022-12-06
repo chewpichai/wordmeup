@@ -12,6 +12,7 @@
     "@hookform/resolvers": "^2.9.8",
     "axios": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
+    "lodash.debounce": "^4.0.8",
     "moment": "^2.29.4",
     "mongoose": "^6.6.4",
     "next": "12.3.1",

@@ -1,7 +1,8 @@
 import axios from 'axios'
 import moment from 'moment/moment'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { UserForm } from 'components'
+import debounce from 'lodash.debounce'
 
 const INIT_USER = {
   username: '',
@@ -19,6 +20,7 @@ export default function User() {
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
   const [editingUser, setEditingUser] = useState(INIT_USER)
+  const [searchTxt, setSearchTxt] = useState('')
 
   useEffect(() => {
     axios.get('/api/user')
@@ -66,13 +68,22 @@ export default function User() {
     }
   }
 
+  const handleSearchChange = useMemo(
+    () => debounce((evt => {
+      setSearchTxt(evt.target.value)
+    }), 500)
+  , [])
+
   if (loading)
     return <div className="text-center"><div className="spinner-border"/></div>
 
   return (
     <>
-    <div className="mb-4">
+    <div className="d-flex align-items-center mb-4">
       <button className="btn btn-icon btn-circle btn-outline-primary" onClick={handleAddClick}><i className="bi bi-plus-lg"></i></button>
+      <div className="ml-auto col-xs-12">
+        <input className="form-control" type="text" placeholder="Search" autoComplete="off" onChange={handleSearchChange} />
+      </div>
     </div>
 
     <div className="table-overflow">
@@ -93,7 +104,7 @@ export default function User() {
           </tr>
         </thead>
         <tbody>
-        {users.map((u, i) =>
+        {users.filter(u => Object.values(u).some(v => v.toString().includes(searchTxt))).map((u, i) =>
           <tr key={i}>
             <th scope="row">{i + 1}</th>
             <td>{u.username}</td>

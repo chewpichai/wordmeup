@@ -15,7 +15,7 @@ export function Nav() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light custom-menu menu-pills">
       <div className="container">
-        <Link className="navbar-brand" href="/"><Image src="/logo-wordmeup.png" width="197" height="75" layout="responsive"/></Link>
+        <Link className="navbar-brand" href="/"><Image src="/logo-wordmeup.png" width="197" height="75" layout="responsive" priority={true}/></Link>
           
         <button className={`navbar-toggler collapsed ${user ? '' : 'invisible'}`} type="button" data-toggle="collapse" data-target="#navbar-toggle-pills">
           <span className="icon-bar top-bar"></span>
@@ -62,7 +62,12 @@ export function Nav() {
                 <span>&times;</span>
               </button>
               <div className="embed-responsive embed-responsive-16by9 my-2 mx-auto" style={{maxWidth:640}}>
-                <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/ehrhk1lizM8" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe
+                  className="embed-responsive-item"
+                  src="https://www.youtube.com/embed/ehrhk1lizM8"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
               </div>
             </div>
           </div>
