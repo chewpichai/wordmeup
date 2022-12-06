@@ -86,7 +86,7 @@ export default function User() {
       </div>
     </div>
 
-    <div className="table-overflow">
+    <div className="table-responsive">
       <table className="table">
         <thead className="thead-light">
           <tr className="text-center">
