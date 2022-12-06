@@ -17,6 +17,6 @@ async function authenticate(req, res) {
   if (!user.isAdmin && (user.startDate > now || now > user.endDate))
     return res.status(403).end('Not in learning period.')
   const token = jwt.sign({ sub: user.id }, serverRuntimeConfig.secret, { expiresIn: '7d' })
-  const { password, words, isAdmin, ...rest } = user._doc
+  const { password, words, ...rest } = user._doc
   return res.status(200).json({ ...rest, token })
 }
