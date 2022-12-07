@@ -132,7 +132,7 @@ export default function Main() {
         <div className="mx-2 ipad">
           <h4 className="mb-2">Until today</h4>
           <p>You firmly memorized <span className="text-danger">{stat.completed}</span> words.</p>
-          <p>You still have <span className="text-danger">{stat.totalWords}</span> words to fight for.</p>
+          <p>You still have <span className="text-danger">{stat.remain}</span> words to fight for.</p>
           <button className="btn btn-primary-gradient mt-2" onClick={() => setSessionEnded(true)}>NEXT</button>
         </div>
       </div>
