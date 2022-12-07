@@ -125,16 +125,16 @@ export default function Main() {
       </div>
     )
 
-  if (finished)
+  if (true)
     return (
-      <div className="d-flex justify-content-center">
-        <div className="mx-2 d-none d-md-block"><Image src="/state-howto.png" width="220" height="475"/></div>
-        <div className="mx-2 ipad">
+      <div className="ipad-container">
+        <div className="ipad">
           <h4 className="mb-2">Until today</h4>
           <p>You firmly memorized <span className="text-danger">{stat.completed}</span> words.</p>
           <p>You still have <span className="text-danger">{stat.remain}</span> words to fight for.</p>
-          <button className="btn btn-primary-gradient mt-2" onClick={() => setSessionEnded(true)}>NEXT</button>
+          <button className="btn btn-primary-gradient mt-4" onClick={() => setSessionEnded(true)}>NEXT</button>
         </div>
+        <div className="ipad-cartoon"><Image src="/state-howto.png" width="400" height="863"/></div>
       </div>
     )
 

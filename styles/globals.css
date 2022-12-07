@@ -134,13 +134,56 @@ footer {
   text-align: center;
 }
 
+.ipad-cartoon {
+  max-width: 200px;
+  margin-top: 1rem;
+}
+
 @media only screen and (min-width: 768px) {
+  .ipad-container {
+    width: 680px;
+    margin: 0 auto;
+  }
+
   .ipad {
     border: 10px solid black;
     border-bottom-width: 24px;
     border-radius: 8px;
     padding: 1rem;
-    padding-top: 6rem;
+    padding-top: 5rem;
+    max-width:  330px;
+    height: 480px;
+    position: relative;
+    left: 350px;
+  }
+
+  .ipad::after {
+    content: '';
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(120deg, #6782e6 0%, #5360de 100%);
+    position: absolute;
+    bottom: -120px;
+    left: 0;
+  }
+
+  .ipad-cartoon {
+    margin-top: 0;
+    max-width: 330px;
+    position: relative;
+    top: -200px;
+  }
+
+  .ipad-cartoon::before {
+    content: '';
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(120deg, #6782e6 0%, #5360de 100%);
+    position: absolute;
+    top: 300px;
+    right: -20px;
   }
 }
 
