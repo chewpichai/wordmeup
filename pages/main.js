@@ -125,7 +125,7 @@ export default function Main() {
       </div>
     )
 
-  if (true)
+  if (finished)
     return (
       <div className="ipad-container">
         <div className="ipad">
