@@ -1,4 +1,4 @@
-import NextLink from 'next/link';
+import NextLink from 'next/link'
 
 export function Link({ href, children, ...props }) {
   return (
@@ -7,5 +7,5 @@ export function Link({ href, children, ...props }) {
         {children}
       </a>
     </NextLink>
-  );
+  )
 }
