@@ -130,6 +130,10 @@ footer {
   line-height: 2rem;
 }
 
+.ipad-container {
+  overflow: hidden;
+}
+
 .ipad {
   text-align: center;
 }
@@ -142,6 +146,7 @@ footer {
 @media only screen and (min-width: 768px) {
   .ipad-container {
     width: 680px;
+    max-height: 950px;
     margin: 0 auto;
   }
 
@@ -164,7 +169,7 @@ footer {
     border-radius: 50%;
     background: linear-gradient(120deg, #6782e6 0%, #5360de 100%);
     position: absolute;
-    bottom: -120px;
+    bottom: -100px;
     left: 0;
   }
 
@@ -172,7 +177,7 @@ footer {
     margin-top: 0;
     max-width: 330px;
     position: relative;
-    top: -200px;
+    top: -250px;
   }
 
   .ipad-cartoon::before {
@@ -182,8 +187,8 @@ footer {
     border-radius: 50%;
     background: linear-gradient(120deg, #6782e6 0%, #5360de 100%);
     position: absolute;
-    top: 300px;
-    right: -20px;
+    top: 320px;
+    right: -10px;
   }
 }
 
@@ -201,6 +206,10 @@ footer {
     border-left: 1rem solid transparent;
     border-right: 1rem solid transparent;
     border-bottom: 1rem solid #dd2626;
+  }
+
+  .ipad-container {
+    max-height: 680px;
   }
 }
 
