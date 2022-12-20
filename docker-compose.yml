@@ -4,16 +4,16 @@ services:
   mongo:
     image: mongo:latest
     volumes:
-       - mongo_data:/data/db
-  mongo-express:
-    image: mongo-express:latest
+      - mongo_data:/data/db
+  sftp:
     depends_on:
       - mongo
+    image: atmoz/sftp
+    volumes:
+      - ./sftp/sshd_config:/etc/ssh/sshd_config
     ports:
-      - "8081:8081"
-    environment:
-      - ME_CONFIG_BASICAUTH_USERNAME=admin
-      - ME_CONFIG_BASICAUTH_PASSWORD=pass
+      - "2222:22"
+    command: wordmeup:pass
   wordmeup:
     depends_on:
       - mongo
