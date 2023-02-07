@@ -55,7 +55,8 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
     <Head>
-      <title>WORD ME UP</title>
+      <title>WORD ME UP Vocab Software ตัวช่วยท่องศัพท์จาก ENG ME UP</title>
+      <meta name="description" content="จดจำคำศัพท์เฉพาะสำหรับการสอบ CU-TEP TOEIC และ IELTS อย่างเป็นระบบด้วย Software จากงานวิจัยสร้างความจำถาวร …ใช้ง่าย ได้ผลจริง ที่ ENG ME UP เท่านั้น" />
     </Head>
 
     <div className="app">

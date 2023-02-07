@@ -15,7 +15,7 @@ export function Nav() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light custom-menu menu-pills">
       <div className="container">
-        <Link className="navbar-brand" href="/"><Image src="/logo-wordmeup.png" width="197" height="75" layout="responsive" priority={true}/></Link>
+        <Link className="navbar-brand" href="/"><Image src="/logo-wordmeup.png" alt="WORD ME UP" width="197" height="75" layout="responsive" priority/></Link>
           
         <button className={`navbar-toggler collapsed ${user ? '' : 'invisible'}`} type="button" data-toggle="collapse" data-target="#navbar-toggle-pills">
           <span className="icon-bar top-bar"></span>
