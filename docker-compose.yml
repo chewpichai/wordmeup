@@ -1,5 +1,5 @@
 version: "3.9"
-   
+
 services:
   mongo:
     image: mongo:latest
@@ -20,6 +20,6 @@ services:
     build: .
     ports:
       - "3000:3000"
-      
+
 volumes:
   mongo_data:

@@ -27,7 +27,7 @@ export function Nav() {
         </Link>
 
         <button
-          className={`navbar-toggler collapsed ${user ? "" : "invisible"}`}
+          className="navbar-toggler collapsed"
           type="button"
           data-toggle="collapse"
           data-target="#navbar-toggle-pills"
@@ -38,58 +38,65 @@ export function Nav() {
         </button>
 
         <div className="collapse navbar-collapse" id="navbar-toggle-pills">
-          <ul className={`navbar-nav flex-fill ${user ? "" : ""}`}>
-            {isAdmin ? (
-              <>
-                <li className="nav-item">
-                  <NavLink className="nav-link" href="/admin/user">
-                    User
-                  </NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink className="nav-link" href="/admin/word">
-                    Word
-                  </NavLink>
-                </li>
-              </>
+          <ul className="navbar-nav flex-fill">
+            {user ? (
+              isAdmin ? (
+                <>
+                  <li className="nav-item">
+                    <NavLink className="nav-link" href="/admin/user">
+                      User
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link" href="/admin/word">
+                      Word
+                    </NavLink>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className="nav-item">
+                    <NavLink className="nav-link" href="/main">
+                      Main
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link" href="/completed">
+                      My Completed Words
+                    </NavLink>
+                  </li>
+                </>
+              )
             ) : (
-              <>
-                <li className="nav-item">
-                  <NavLink className="nav-link" href="/main">
-                    Main
-                  </NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink className="nav-link" href="/completed">
-                    My Completed Words
-                  </NavLink>
-                </li>
-                <li className="nav-item">
-                  <a
-                    className="nav-link"
-                    href="#howto"
-                    onClick={() => $("#modal-video").modal("show")}
-                    style={{
-                      backgroundImage: "url('/icon-video.png')",
-                      backgroundSize: "48px 48px",
-                      backgroundRepeat: "no-repeat",
-                      paddingLeft: "48px",
-                    }}
-                  >
-                    How to Use
-                  </a>
-                </li>
-              </>
+              ""
             )}
-            <li className="nav-item ml-lg-auto">
+            <li className="nav-item">
               <a
                 className="nav-link"
-                href="#logout"
-                onClick={userService.logout}
+                href="#howto"
+                onClick={() => $("#modal-video").modal("show")}
+                style={{
+                  backgroundImage: "url('/icon-video.png')",
+                  backgroundSize: "36px 36px",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPositionY: "center",
+                  paddingLeft: "36px",
+                }}
               >
-                Logout
+                How to Use
               </a>
             </li>
+            {user && (
+              <li className="nav-item ml-lg-auto">
+                <a
+                  className="nav-link"
+                  href="#logout"
+                  onClick={userService.logout}
+                >
+                  Logout
+                </a>
+              </li>
+            )}
           </ul>
         </div>
       </div>
