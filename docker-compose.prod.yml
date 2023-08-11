@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  mongo:
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongo_data:/data/db
+  sftp:
+    depends_on:
+      - mongo
+    image: atmoz/sftp
+    restart: always
+    volumes:
+      - ./sftp/sshd_config:/etc/ssh/sshd_config
+    ports:
+      - "2222:22"
+    command: wordmeup:pass
+  wordmeup:
+    depends_on:
+      - mongo
+    build: .
+    restart: always
+    ports:
+      - "3000:3000"
+
+volumes:
+  mongo_data:
