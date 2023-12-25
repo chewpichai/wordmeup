@@ -26,7 +26,7 @@ export function Nav() {
           />
         </Link>
 
-        <button
+        {/* <button
           className="navbar-toggler collapsed"
           type="button"
           data-toggle="collapse"
@@ -37,7 +37,8 @@ export function Nav() {
           <span className="icon-bar bottom-bar"></span>
         </button>
 
-        <div className="collapse navbar-collapse" id="navbar-toggle-pills">
+        <div className="collapse navbar-collapse" id="navbar-toggle-pills"> */}
+        <div>
           <ul className="navbar-nav flex-fill">
             {user ? (
               isAdmin ? (
