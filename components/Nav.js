@@ -26,7 +26,7 @@ export function Nav() {
           />
         </Link>
 
-        {/* <button
+        <button
           className="navbar-toggler collapsed"
           type="button"
           data-toggle="collapse"
@@ -37,8 +37,7 @@ export function Nav() {
           <span className="icon-bar bottom-bar"></span>
         </button>
 
-        <div className="collapse navbar-collapse" id="navbar-toggle-pills"> */}
-        <div>
+        <div className="collapse navbar-collapse" id="navbar-toggle-pills">
           <ul className="navbar-nav flex-fill">
             {user ? (
               isAdmin ? (
@@ -73,15 +72,14 @@ export function Nav() {
             )}
             <li className="nav-item">
               <a
-                className="nav-link"
+                className="nav-link pl-md-[24px]"
                 href="#howto"
                 onClick={() => $("#modal-video").modal("show")}
                 style={{
                   backgroundImage: "url('/icon-video.png')",
-                  backgroundSize: "36px 36px",
+                  backgroundSize: "24px 24px",
                   backgroundRepeat: "no-repeat",
                   backgroundPositionY: "center",
-                  paddingLeft: "36px",
                 }}
               >
                 How to Use
