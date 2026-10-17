@@ -5,3 +5,6 @@ npm-debug.log
 README.md
 .next
 .git
+# [Let's Practice] ไม่เอาไฟล์ค่าลับเข้า Docker image (docker compose อ่าน .env เองตอนรัน)
+.env
+.env.*

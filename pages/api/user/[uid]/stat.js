@@ -1,8 +1,8 @@
 import { User, Word } from 'models'
-import { apiHandler } from 'utils'
+import { apiHandler, withAuth } from 'utils'
 
 export default apiHandler({
-  get: getStat,
+  get: withAuth(getStat, { owner: true }), // [security patch]
 });
 
 

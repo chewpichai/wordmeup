@@ -1,9 +1,10 @@
 import { Word } from 'models'
-import { apiHandler } from 'utils'
+import { apiHandler, withAuth } from 'utils'
 
 export default apiHandler({
-  put: update,
-  delete: _delete,
+  // [security patch] admin เท่านั้น
+  put: withAuth(update, { admin: true }),
+  delete: withAuth(_delete, { admin: true }),
 });
 
 

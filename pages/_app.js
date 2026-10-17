@@ -8,6 +8,9 @@ import 'styles/globals.css'
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
   const [authorized, setAuthorized] = useState(false)
+  // [Let's Practice] ปีใน footer ใส่หลังโหลดหน้า (HTML ที่ build ไว้กับในเบราว์เซอร์ตรงกันเสมอ ไม่มี error ตอนขึ้นปีใหม่)
+  const [year, setYear] = useState('')
+  useEffect(() => setYear(String(new Date().getFullYear())), [])
 
   useEffect(() => {
     // on initial load - run auth check 
@@ -35,7 +38,7 @@ function MyApp({ Component, pageProps }) {
   }, [authorized])
 
   function authCheck(url) {
-    const publicPaths = ['/']
+    const publicPaths = ['/', '/practice/demo'] // [Let's Practice] เดโมเปิดได้โดยไม่ต้อง login
     const path = url.split('?')[0]
     const isAdmin = path.startsWith('/admin')
     if (!userService.userValue && !publicPaths.includes(path)) {
@@ -64,7 +67,7 @@ function MyApp({ Component, pageProps }) {
       <div className="container py-4">
         {authorized && <Component {...pageProps} />}
       </div>
-      <footer className="text-center p-2"><span className="d-none d-sm-inline">Copyright</span> &copy; 2012 By English-Me-Up Hybrid Education Co., Ltd. All Right Reserved</footer>
+      <footer className="text-center p-2"><span className="d-none d-sm-inline">Copyright</span> &copy; 2012{year && `–${year}`} English-Me-Up Hybrid Education Co., Ltd. All Rights Reserved.</footer>
     </div>
     </>
   )

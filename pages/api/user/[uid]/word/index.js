@@ -1,9 +1,9 @@
 import moment from "moment";
 import { User, Word } from "models";
-import { apiHandler } from "utils";
+import { apiHandler, withAuth } from "utils";
 
 export default apiHandler({
-  get: getList,
+  get: withAuth(getList, { owner: true }), // [security patch]
 });
 
 async function getList(req, res) {

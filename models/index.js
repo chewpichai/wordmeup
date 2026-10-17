@@ -1,2 +1,6 @@
 export * from './user'
 export * from './word'
+export * from './practice-progress'
+export * from './practice-content'
+export * from './practice-order'
+export * from './word-fix-log'

@@ -34,3 +34,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# [Let's Practice] ค่าลับ เช่น JWT_SECRET เก็บในไฟล์ .env ข้าง docker-compose.prod.yml เท่านั้น ห้าม commit ลง git
+.env
+.env.production

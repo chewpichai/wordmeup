@@ -1,9 +1,10 @@
 import { Word } from 'models'
-import { apiHandler } from 'utils'
+import { apiHandler, withAuth } from 'utils'
 
 export default apiHandler({
-  get: getList,
-  post: create,
+  // [security patch] จัดการคลังคำ = admin เท่านั้น
+  get: withAuth(getList, { admin: true }),
+  post: withAuth(create, { admin: true }),
 });
 
 async function getList(req, res) {
