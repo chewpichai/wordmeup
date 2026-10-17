@@ -25,6 +25,7 @@ services:
       - "3000:3000"
     environment:
       - JWT_SECRET=${JWT_SECRET}
+      - MONGO_URL=${MONGO_URL:-mongodb://mongo:27017/wordmeup}
 
 volumes:
   mongo_data:
