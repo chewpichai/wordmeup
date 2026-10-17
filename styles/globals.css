@@ -110,7 +110,8 @@ body .btn-xs.btn-icon:hover {
   padding: 0;
 }
 
-.navbar-expand-lg .navbar-brand {
+.navbar-expand-lg .navbar-brand,
+.navbar-expand-xl .navbar-brand {
   height: 60px;
   width: 158px;
   max-height: 60px;
@@ -197,9 +198,21 @@ footer {
 }
 
 @media only screen and (min-width: 992px) {
-  .navbar-expand-lg.custom-menu.menu-pills {
+  .navbar-expand-lg.custom-menu.menu-pills,
+  .navbar-expand-xl.custom-menu.menu-pills {
     padding: 0;
     z-index: 1051;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .navbar-expand-xl.custom-menu.menu-pills {
+    padding: 20px 0;
+  }
+  .navbar-expand-xl.custom-menu.menu-pills .nav-link {
+    padding: 12px 34px;
+    margin: 0 5px;
+    border-radius: 50px;
   }
 
   .modal-howto .modal-dialog::after {

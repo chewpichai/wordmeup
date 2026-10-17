@@ -1,19 +1,70 @@
-import { useEffect, useState } from "react";
-import { NavLink, Link } from ".";
-import { userService } from "services";
-import Image from "next/image";
 import { lpIsNew } from "libs/practice-version";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { userService } from "services";
+import { Link, NavLink } from ".";
 
 // ลิงก์ในหน้าต่าง How to Use ใช้ <a> ธรรมดา (โหลดหน้าใหม่) เพื่อให้หน้าต่าง Bootstrap ปิดสนิท
 const DEMO_HREF = "/practice/demo";
 // สไตล์แท็บในหน้าต่าง How to Use (inline เพื่อไม่ชนกับธีมเดิม)
-const TABS = { display: "flex", gap: 6, padding: 4, borderRadius: 999, background: "#F4F6FD", marginBottom: 16 };
+const TABS = {
+  display: "flex",
+  gap: 6,
+  padding: 4,
+  borderRadius: 999,
+  background: "#F4F6FD",
+  marginBottom: 16,
+};
 // position: relative กันกฎธีมเดิม (.navbar-expand-lg button:not(.collapsed){position:fixed} บนมือถือ) เพราะหน้าต่างนี้อยู่ใน <nav>
-const TAB = { position: "relative", top: "auto", right: "auto", flex: 1, minHeight: 42, border: 0, borderRadius: 999, background: "transparent", fontWeight: 600, fontSize: 15, color: "#5E6170", cursor: "pointer", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 6 };
-const TAB_ON = { background: "#fff", color: "#2E3A8F", boxShadow: "0 6px 14px -10px rgba(31,40,112,.6)" };
-const NEW_BADGE = { padding: "1px 8px", borderRadius: 999, background: "#C8202F", color: "#fff", fontSize: 11, fontWeight: 700 };
-const TOUR_BTN = { display: "inline-block", padding: "10px 26px", borderRadius: 999, background: "#fff", color: "#B8336F", fontWeight: 700, textDecoration: "none" };
-const GHOST_BTN = { display: "inline-block", padding: "9px 22px", borderRadius: 999, border: "2px solid #E3E6F3", color: "#2E3A8F", fontWeight: 600, textDecoration: "none" };
+const TAB = {
+  position: "relative",
+  top: "auto",
+  right: "auto",
+  flex: 1,
+  minHeight: 42,
+  border: 0,
+  borderRadius: 999,
+  background: "transparent",
+  fontWeight: 600,
+  fontSize: 15,
+  color: "#5E6170",
+  cursor: "pointer",
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: 6,
+};
+const TAB_ON = {
+  background: "#fff",
+  color: "#2E3A8F",
+  boxShadow: "0 6px 14px -10px rgba(31,40,112,.6)",
+};
+const NEW_BADGE = {
+  padding: "1px 8px",
+  borderRadius: 999,
+  background: "#C8202F",
+  color: "#fff",
+  fontSize: 11,
+  fontWeight: 700,
+};
+const TOUR_BTN = {
+  display: "inline-block",
+  padding: "10px 26px",
+  borderRadius: 999,
+  background: "#fff",
+  color: "#B8336F",
+  fontWeight: 700,
+  textDecoration: "none",
+};
+const GHOST_BTN = {
+  display: "inline-block",
+  padding: "9px 22px",
+  borderRadius: 999,
+  border: "2px solid #E3E6F3",
+  color: "#2E3A8F",
+  fontWeight: 600,
+  textDecoration: "none",
+};
 
 export function Nav() {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -40,14 +91,17 @@ export function Nav() {
     setHowTab(tab);
     const $m = window.$ && window.$("#modal-video");
     if (!$m) return;
-    $m.off("hidden.bs.modal.howto").on("hidden.bs.modal.howto", () => setHowKey((k) => k + 1)); // ปิดแล้วหยุดคลิป
+    $m.off("hidden.bs.modal.howto").on("hidden.bs.modal.howto", () =>
+      setHowKey((k) => k + 1)
+    ); // ปิดแล้วหยุดคลิป
     $m.modal("show");
   }
 
-  const tourHref = user && !isAdmin ? "/practice?tour=1" : "/practice/demo?tour=1";
+  const tourHref =
+    user && !isAdmin ? "/practice?tour=1" : "/practice/demo?tour=1";
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light custom-menu menu-pills">
+    <nav className="navbar navbar-expand-xl navbar-light custom-menu menu-pills">
       <div className="container">
         <Link className="navbar-brand" href="/">
           <Image
@@ -100,9 +154,27 @@ export function Nav() {
                     </NavLink>
                   </li>
                   <li className="nav-item">
-                    <NavLink className="nav-link" href="/practice">
+                    <NavLink
+                      className="nav-link position-relative"
+                      href="/practice"
+                      style={isNew ? { paddingRight: 46 } : null}
+                    >
                       Let&apos;s Practice
-                      {isNew && <>{" "}<span className="badge badge-pill badge-danger align-text-top">NEW</span></>}
+                      {isNew && (
+                        <span
+                          className="badge badge-pill badge-danger position-absolute"
+                          style={{
+                            top: 6,
+                            right: 10,
+                            fontSize: 10,
+                            padding: "2px 6px",
+                            lineHeight: 1,
+                            boxShadow: "0 2px 4px rgba(200,32,47,0.25)",
+                          }}
+                        >
+                          NEW
+                        </span>
+                      )}
                     </NavLink>
                   </li>
                   <li className="nav-item">
@@ -157,10 +229,18 @@ export function Nav() {
               </button>
               <h5 className="mb-3 pr-4">How to Use · วิธีใช้ WORD ME UP</h5>
               <div role="tablist" style={TABS}>
-                {[["cards", "การ์ดท่องศัพท์"], ["lp", "Let's Practice"]].map(([k, t]) => (
-                  <button key={k} type="button" role="tab" aria-selected={howTab === k}
+                {[
+                  ["cards", "การ์ดท่องศัพท์"],
+                  ["lp", "Let's Practice"],
+                ].map(([k, t]) => (
+                  <button
+                    key={k}
+                    type="button"
+                    role="tab"
+                    aria-selected={howTab === k}
                     style={{ ...TAB, ...(howTab === k ? TAB_ON : null) }}
-                    onClick={() => setHowTab(k)}>
+                    onClick={() => setHowTab(k)}
+                  >
                     {t}
                     {k === "lp" && isNew && <span style={NEW_BADGE}>ใหม่</span>}
                   </button>
@@ -181,22 +261,46 @@ export function Nav() {
                   />
                 </div>
               ) : (
-                <div className="text-center py-2" style={{ maxWidth: 640, margin: "0 auto" }}>
-                  <div className="rounded-lg p-4 mb-3 text-white" style={{ background: "linear-gradient(120deg,#8E2C5A,#D1417D)", borderRadius: 16 }}>
-                    <div style={{ fontSize: 20, fontWeight: 600 }}>ให้ครูโจพาทัวร์ 1 นาที</div>
-                    <div className="mb-3" style={{ fontSize: 14, opacity: 0.9 }}>กดแล้วครูโจพาชี้ทีละจุดว่าเล่นยังไง</div>
+                <div
+                  className="text-center py-2"
+                  style={{ maxWidth: 640, margin: "0 auto" }}
+                >
+                  <div
+                    className="rounded-lg p-4 mb-3 text-white"
+                    style={{
+                      background: "linear-gradient(120deg,#8E2C5A,#D1417D)",
+                      borderRadius: 16,
+                    }}
+                  >
+                    <div style={{ fontSize: 20, fontWeight: 600 }}>
+                      ให้ครูโจพาทัวร์ 1 นาที
+                    </div>
+                    <div
+                      className="mb-3"
+                      style={{ fontSize: 14, opacity: 0.9 }}
+                    >
+                      กดแล้วครูโจพาชี้ทีละจุดว่าเล่นยังไง
+                    </div>
                     <a style={TOUR_BTN} href={tourHref}>
                       เริ่มทัวร์
                     </a>
                   </div>
                   <ol className="text-left mb-2" style={{ lineHeight: 1.7 }}>
                     <li>ท่องการ์ดเสร็จแล้ว กดเมนู Let&apos;s Practice</li>
-                    <li>เลือกด่านจากแผนที่ ชุดละประมาณ 20 คำ 6 ด่าน ไล่จากง่ายไปยาก</li>
-                    <li>อ่านวิธีเล่น แล้วกดเริ่ม ตอบแล้วเห็นเฉลยทันที ข้อที่ผิดจะวนกลับมา</li>
+                    <li>
+                      เลือกด่านจากแผนที่ ชุดละประมาณ 20 คำ 6 ด่าน
+                      ไล่จากง่ายไปยาก
+                    </li>
+                    <li>
+                      อ่านวิธีเล่น แล้วกดเริ่ม ตอบแล้วเห็นเฉลยทันที
+                      ข้อที่ผิดจะวนกลับมา
+                    </li>
                     <li>เก็บดาวให้ครบ คำที่ตอบถูกจะเข้าสมุดคำศัพท์ไว้ทวน</li>
                   </ol>
                   {!user && (
-                    <a style={GHOST_BTN} href={DEMO_HREF}>ลองเล่นเดโมเอง</a>
+                    <a style={GHOST_BTN} href={DEMO_HREF}>
+                      ลองเล่นเดโมเอง
+                    </a>
                   )}
                 </div>
               )}
