@@ -21,6 +21,8 @@ export default function User() {
   const [loading, setLoading] = useState(true);
   const [editingUser, setEditingUser] = useState(INIT_USER);
   const [searchTxt, setSearchTxt] = useState("");
+  // [v1.3.1] รหัสผ่านซ่อนเป็น •••• · กดรูปตาเพื่อดูทีละคน (กันคนแอบมองจอ / เผลอแคปหน้าจอ)
+  const [shownPw, setShownPw] = useState({});
 
   useEffect(() => {
     axios.get("/api/user").then((response) => {
@@ -84,6 +86,7 @@ export default function User() {
         <button
           className="btn btn-icon btn-circle btn-outline-primary"
           onClick={handleAddClick}
+          aria-label="เพิ่มผู้ใช้"
         >
           <i className="bi bi-plus-lg"></i>
         </button>
@@ -92,6 +95,7 @@ export default function User() {
             className="form-control"
             type="text"
             placeholder="Search"
+            aria-label="ค้นหาผู้ใช้"
             autoComplete="off"
             onChange={handleSearchChange}
           />
@@ -118,13 +122,30 @@ export default function User() {
           <tbody>
             {users
               .filter((u) =>
-                Object.values(u).some((v) => v?.toString().includes(searchTxt))
+                Object.entries(u).some(([k, v]) => k !== "password" && v?.toString().includes(searchTxt))
               )
               .map((u, i) => (
                 <tr key={i}>
                   <th scope="row">{i + 1}</th>
                   <td>{u.username}</td>
-                  <td>{u.password}</td>
+                  <td className="text-nowrap">
+                    {/^scrypt\$/.test(u.password || "") ? (
+                      <small style={{ color: "#5E6170" }}>ตั้งรหัสใหม่เพื่อดู</small>
+                    ) : (
+                      <>
+                        <span style={{ fontFamily: shownPw[u._id] ? "inherit" : "monospace" }}>{shownPw[u._id] ? u.password : "••••••"}</span>
+                        <button
+                          type="button"
+                          className="btn btn-link btn-sm p-0 ml-2 align-baseline"
+                          aria-label={`${shownPw[u._id] ? "ซ่อน" : "ดู"}รหัสผ่านของ ${u.username}`}
+                          aria-pressed={!!shownPw[u._id]}
+                          onClick={() => setShownPw((m) => ({ ...m, [u._id]: !m[u._id] }))}
+                        >
+                          <i className={`bi ${shownPw[u._id] ? "bi-eye-slash" : "bi-eye"}`} aria-hidden="true"></i>
+                        </button>
+                      </>
+                    )}
+                  </td>
                   <td>{u.firstName}</td>
                   <td>{u.lastName}</td>
                   <td>{u.email}</td>
@@ -136,12 +157,14 @@ export default function User() {
                     <button
                       className="btn btn-xs btn-icon btn-circle btn-outline-warning m-1"
                       onClick={handleEditClick(u)}
+                      aria-label={`แก้ ${u.username}`}
                     >
                       <i className="bi bi-pencil-square"></i>
                     </button>
                     <button
                       className="btn btn-xs btn-icon btn-circle btn-outline-danger m-1"
                       onClick={handleDeleteClick(u)}
+                      aria-label={`ลบ ${u.username}`}
                     >
                       <i className="bi bi-trash-fill"></i>
                     </button>

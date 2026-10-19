@@ -3,7 +3,7 @@
 //        หน้า Admin → Practice ("หน้าแอดมิน v… · server v…") และ API /api/practice/admin/status
 // เปลี่ยนไฟล์ใน public/practice/ เมื่อไหร่ ให้เปลี่ยนเลขนี้ด้วย (เบราว์เซอร์จะโหลดไฟล์ใหม่ ไม่ใช้ของเก่าใน cache)
 // ไฟล์นี้ไม่มี import อะไรเลย จึงใช้ได้ทั้งฝั่ง server และฝั่งเบราว์เซอร์
-export const LP_VERSION = '1.2'
+export const LP_VERSION = '1.3.1'
 
 // ป้าย NEW ของ Let's Practice (เมนู / หน้าแรก / How to Use)
 // แสดง 30 วันนับจากวันแรกที่เครื่องนั้นเห็น และไม่เกินวันที่ NEW_UNTIL (หลังวันนี้ไม่มีใครเห็นป้าย NEW แล้ว)

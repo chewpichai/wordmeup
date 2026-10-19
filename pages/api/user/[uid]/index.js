@@ -1,5 +1,6 @@
 import { User, PracticeProgress } from 'models'
 import { apiHandler, withAuth, publicUser } from 'utils'
+import { checkNewPassword } from 'libs/password'
 
 // [security patch] แก้ได้เฉพาะบัญชีตัวเอง (หรือ admin) · นักเรียนแก้ได้แค่ field ที่ควรแก้ · ลบ = admin เท่านั้น
 const STUDENT_FIELDS = ['numPerDay', 'showHowto']
@@ -36,12 +37,25 @@ async function update(req, res) {
   } else {
     const { out, error } = checkFields(body)
     if (error) return res.status(400).json({ message: error })
-    if (req.me.isAdmin) Object.keys(body).map(k => user[k] = body[k])
+    if (req.me.isAdmin) {
+      // [v1.3.1] รหัสผ่าน: ช่องว่าง = ใช้รหัสเดิม · ใส่รหัสใหม่ = เปลี่ยนรหัส · ไม่รับ field ระบบจากหน้าเว็บ
+      const pw = body.password
+      if (typeof pw === 'string' && pw !== '') {
+        const err = checkNewPassword(pw)
+        if (err) return res.status(400).json({ message: err })
+      }
+      if (typeof body.username === 'string' && body.username !== user.username && await User.exists({ username: body.username }))
+        return res.status(400).json({ message: 'มี Username นี้อยู่แล้ว' })
+      Object.keys(body).forEach(k => { if (!['_id', '__v', 'words', 'password'].includes(k)) user[k] = body[k] })
+      if (typeof pw === 'string' && pw !== '') user.password = pw
+    }
     else STUDENT_FIELDS.forEach(k => { if (k in body) user[k] = body[k] })
     Object.assign(user, out)
   }
   await user.save()
-  res.json(req.me.isAdmin ? user : publicUser(user))
+  // แอดมินได้ข้อมูลพร้อมรหัสผ่าน (หน้า User) · นักเรียนไม่ได้รหัสผ่านกลับไป
+  if (req.me.isAdmin) { const { words, __v, ...rest } = user.toObject(); return res.json(rest) }
+  res.json(publicUser(user))
 }
 
 async function _delete(req, res) {
@@ -51,5 +65,5 @@ async function _delete(req, res) {
     // [Let's Practice] ลบความคืบหน้า Let's Practice ของคนนั้นด้วย
     await PracticeProgress.deleteOne({ user: user._id })
   }
-  res.json(user)
+  res.json(user ? publicUser(user) : null)
 }

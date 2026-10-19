@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 import { User } from 'models'
 import { apiHandler, JWT_SECRET } from 'utils'
+import { verifyPassword } from 'libs/password'
 
 export default apiHandler({
   post: authenticate
@@ -15,7 +16,8 @@ async function authenticate(req, res) {
   // หา username ตามที่พิมพ์ก่อน (เหมือนระบบเดิม) ถ้าไม่เจอค่อยลองแบบตัดช่องว่างหัวท้าย (เผื่อพิมพ์เว้นวรรคเกิน)
   let user = await User.findOne({ username: raw })
   if (!user && raw.trim() && raw.trim() !== raw) user = await User.findOne({ username: raw.trim() })
-  if (!user || user.deleted || user.password !== password)
+  // [v1.3] ตรวจรหัสแบบเข้ารหัสแล้ว (หรือรหัสเดิมที่ยังไม่ได้เข้ารหัส) · ไม่เทียบรหัสตรงๆ
+  if (!user || user.deleted || !(await verifyPassword(password, user.password)))
     return res.status(403).end('No username or password.')
   const now = new Date()
   if (!user.isAdmin && (user.startDate > now || now > user.endDate))
