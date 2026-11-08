@@ -4,6 +4,14 @@ import { useEffect, useState } from "react";
 import { userService } from "services";
 import { Link, NavLink } from ".";
 
+// v1.5: คลิปวิธีใช้ Let's Practice บน YouTube (ช่อง ENG ME UP)
+// มือถือ (จอแคบกว่า 768px) แสดงคลิปแนวตั้ง (Shorts) · คอม/iPad แสดงคลิปแนวนอน
+const LP_CLIP_H = "LTaFF7cEVAM"; // https://youtu.be/LTaFF7cEVAM
+const LP_CLIP_V = "X2pR-4mb5jc"; // https://youtube.com/shorts/X2pR-4mb5jc
+// สำรอง: ถ้าลบ YouTube ID ออก จะใช้ไฟล์วิดีโอใน public/practice/video/ แทน (v1.5 ไม่ได้ส่งไฟล์วิดีโอมา)
+const LP_FILE_H = "/practice/video/wmu_lp_howto_h.mp4";
+const LP_FILE_V = "/practice/video/wmu_lp_howto_v.mp4";
+
 // ลิงก์ในหน้าต่าง How to Use ใช้ <a> ธรรมดา (โหลดหน้าใหม่) เพื่อให้หน้าต่าง Bootstrap ปิดสนิท
 const DEMO_HREF = "/practice/demo";
 // สไตล์แท็บในหน้าต่าง How to Use (inline เพื่อไม่ชนกับธีมเดิม)
@@ -99,6 +107,19 @@ export function Nav() {
 
   const tourHref =
     user && !isAdmin ? "/practice?tour=1" : "/practice/demo?tour=1";
+
+  // v1.4: เลือกคลิปตามขนาดจอ
+  const mob =
+    typeof window !== "undefined" &&
+    window.matchMedia &&
+    window.matchMedia("(max-width: 767px)").matches;
+  const lpClip = mob
+    ? LP_CLIP_V
+      ? { id: LP_CLIP_V, v: true }
+      : { file: LP_FILE_V, v: true }
+    : LP_CLIP_H
+    ? { id: LP_CLIP_H, v: false }
+    : { file: LP_FILE_H, v: false };
 
   return (
     <nav className="navbar navbar-expand-xl navbar-light custom-menu menu-pills">
@@ -265,6 +286,48 @@ export function Nav() {
                   className="text-center py-2"
                   style={{ maxWidth: 640, margin: "0 auto" }}
                 >
+                  {lpClip && (
+                    <div
+                      className={`embed-responsive mb-3 ${
+                        lpClip.v ? "" : "embed-responsive-16by9"
+                      }`}
+                      style={
+                        lpClip.v
+                          ? {
+                              paddingTop: 0,
+                              width: "auto",
+                              height: "min(70vh, 640px)",
+                              aspectRatio: "9 / 16",
+                              margin: "0 auto",
+                              maxWidth: "100%",
+                            }
+                          : null
+                      }
+                    >
+                      {lpClip.id ? (
+                        <iframe
+                          key={howKey}
+                          className="embed-responsive-item"
+                          src={`https://www.youtube.com/embed/${lpClip.id}`}
+                          title="วิธีใช้ Let's Practice · WORD ME UP"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        />
+                      ) : (
+                        <video
+                          key={howKey}
+                          className="embed-responsive-item"
+                          src={lpClip.file}
+                          poster={lpClip.file.replace(".mp4", ".jpg")}
+                          controls
+                          playsInline
+                          preload="none"
+                          style={{ background: "#000", borderRadius: 12 }}
+                          aria-label="คลิปวิธีใช้ Let's Practice"
+                        />
+                      )}
+                    </div>
+                  )}
                   <div
                     className="rounded-lg p-4 mb-3 text-white"
                     style={{

@@ -411,3 +411,90 @@
 #lp .savewarn .swbtn{margin:6px 0 0 6px;padding:6px 14px;min-height:36px;border:0;border-radius:999px;background:#6B4A00;color:#fff;font-weight:600;font-size:13.5px;cursor:pointer}
 #lp .lineca .lbtn[href="/practice"]{background:var(--pink-ink)}
 #lp a.sr:focus{width:auto;height:auto;clip:auto;overflow:visible;left:8px;top:8px;z-index:50;padding:8px 14px;border-radius:12px;background:#fff;color:var(--navy);box-shadow:var(--sh);font-weight:600;text-decoration:none}
+
+/* v1.4: ปุ่มคู่ในกล่องท้ายเดโม */
+.lcabtns{display:grid;gap:8px}
+@media (min-width:520px){.lcabtns{grid-template-columns:1fr 1fr}}
+.lbtn.lbtn2{background:#fff;color:#2E3A8F;box-shadow:inset 0 0 0 2px #E3E6F3}
+
+/* ---- v1.5 มือถือ/แท็บเล็ต (กฎมือถือ ENG ME UP) · จอคอม ≥1024px ที่ใช้เมาส์ ไม่เปลี่ยน ----
+   1) จอสัมผัส/จอ <1024: ปุ่มแตะได้ ≥44px · ตัวหนังสือ ≥12.5px · แถบบนทึบ · ของที่ล็อก = เส้นประ */
+@media (max-width:1023px),(pointer:coarse){
+#lp .top{background:var(--paper);-webkit-backdrop-filter:none;backdrop-filter:none}
+#lp .back{width:44px;height:44px}
+#lp .back,#lp .help,#lp .chips{flex:none}
+#lp .brand{flex:0 1 auto;overflow:hidden}
+#lp .help{height:44px;min-width:44px}
+#lp .setbtn{height:44px}
+#lp .howto summary{min-height:44px}
+#lp .tb .tskip,#lp .tb .tprev{min-height:44px;padding:8px 10px}
+#lp .tc{font-size:12.5px}
+#lp .man .x{width:44px;height:44px}
+#lp .savewarn .swbtn{min-height:44px}
+#lp .demo{min-height:44px}
+#lp .demo input{font-size:16px}
+#lp .foot,#lp .foot p.ver{font-size:12.5px}
+#lp .brand .lp{font-size:13px}
+#lp .wl li.got{padding:0 0 0 10px}
+#lp .wl li .say{width:44px;height:44px;font-size:17px;background:transparent}
+/* ของที่ยังล็อก: เส้นประ ไม่ใช่กล่องทึบ */
+#lp .node.lock{background:transparent;border:2px dashed #C3C6D3}
+#lp .node.lock .art{background:transparent}
+#lp .lk:before{box-sizing:border-box;background:#fff;border:2px dashed #9A9DAB}
+#lp .lk{color:var(--navy)}
+#lp .node.boss.lock{background:transparent;color:var(--navy);border-color:#9A9DAB}
+#lp .node.boss.lock .art{background:transparent}
+#lp .node.boss.lock .art:after{display:none}
+#lp .node.boss.lock .t small{color:#80838F}
+#lp .node.boss.lock .num{background:#E6E7EE;color:#80838F}
+#lp .setc.lock{background:transparent;border-style:dashed;border-color:#C3C6D3}
+#lp .wl li:not(.got){background:transparent;border:1.5px dashed #CDD0DA}
+/* คู่มือ: ภาพย่อในแต่ละขั้น ตัวหนังสือ ≥12.5px */
+#lp .mv{font-size:12.5px}
+#lp .mlist i{width:20px;height:20px;font-size:12.5px}
+#lp .mopts span{width:auto;min-width:112px}
+#lp .mbook span{width:auto;min-width:120px}
+#lp .mbook small{font-size:12.5px}
+}
+/* 2) มือถือ (<700px · หน้าจอมือถือจริงจะแสดงกว้าง 390px เสมอ ดู libs/practice-version.js) */
+@media (max-width:699px){
+#lp .top{gap:8px;padding:10px 8px}
+#lp .brand img{height:26px}
+#lp .chips{gap:4px}
+#lp .chip{padding:6px 9px}
+#lp .back:not([hidden])+.brand .lp{display:none}
+/* ภาพด่าน: ตัวหนังสือในภาพไม่เล็กกว่า 12.5px */
+#lp .art{height:170px}
+#lp .scene text[font-size="10.5"],#lp .scene text[font-size="11"],#lp .scene text[font-size="12.5"],#lp .scene text[font-size="13"],#lp .scene text[font-size="13.5"]{font-size:14px}
+#lp .scene rect[width="108"]{transform-box:fill-box;transform-origin:center;transform:scaleX(1.2)}
+#lp .mvw{height:auto;min-height:96px}
+#lp .mv.art{height:170px}
+#lp .mv .scene text{font-size:15px}
+#lp .man{padding:8px}
+#lp .man .box{margin:4px auto;padding:20px 14px 18px}
+#lp .mansteps>li{padding:8px}
+/* แผ่นเฉลยด้านล่าง: การ์ตูนอยู่ในแผ่น ไม่ล้นขึ้นไปบังคำตอบ */
+#lp .fb .in{padding-left:96px}
+#lp .fb .fa{width:auto;height:auto;max-width:72px;max-height:calc(100% - 28px)}
+#lp .fb h3{font-size:17.5px}
+#lp .ttip.sheet img{height:88px}
+}
+@media (max-width:420px){#lp:not(.nologo) .brand .lp{display:none}}
+/* แท็บเล็ตแนวตั้ง (700–1023px): ตัวหนังสือในภาพด่านบนแผนที่ ≥12.5px เหมือนมือถือ */
+@media (min-width:700px) and (max-width:1023px){
+#lp .path .art{height:170px}
+#lp .path li.wide2 .art{height:176px}
+#lp .path .scene text[font-size="10.5"],#lp .path .scene text[font-size="11"],#lp .path .scene text[font-size="12.5"],#lp .path .scene text[font-size="13"],#lp .path .scene text[font-size="13.5"]{font-size:14px}
+#lp .path .scene rect[width="108"]{transform-box:fill-box;transform-origin:center;transform:scaleX(1.2)}
+}
+/* 3) มือถือแนวนอน: ขอให้หมุนเป็นแนวตั้ง */
+#lp .rot{display:none}
+@media (orientation:landscape) and (max-height:500px) and (pointer:coarse){
+#lp .rot{position:fixed;inset:0;z-index:1100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px;background:var(--paper);text-align:center;color:var(--navy)}
+#lp .rot img{height:min(46vh,150px);width:auto}
+#lp .rot p{margin:0;font-size:17px;font-weight:600;line-height:1.5}
+#lp .rot .i{font-size:30px;color:var(--pink-ink)}
+}
+
+/* v1.5: keep hidden tip hidden */
+#lp .fb .tip[hidden]{display:none}

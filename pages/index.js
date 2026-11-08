@@ -9,6 +9,13 @@ import s from 'styles/Landing.module.css'
 import { lpIsNew } from 'libs/practice-version'
 
 const LINE_URL = 'https://line.me/R/ti/p/@englishmeup'
+// v1.4: ราคา/วิธีได้ใช้ (ครูโจยืนยัน 27 ต.ค. 2026) · แก้ราคาที่นี่ที่เดียว
+const PRICE = 690
+const COURSES = [
+  ['CU-TEP', 'https://www.englishmeup.com/cutep'],
+  ['TOEIC', 'https://www.englishmeup.com/toeic'],
+  ['IELTS', 'https://www.englishmeup.com/ielts'],
+]
 const INPUT = { color: '#1F2340' } // ตัวอักษรในช่องกรอกให้อ่านง่าย (ธีมเดิมจางมาก)
 const howto = (tab) => window.dispatchEvent(new CustomEvent('wmu:howto', { detail: tab }))
 
@@ -102,13 +109,38 @@ export default function Home() {
             {formState.isSubmitting && <div className="spinner-border spinner-border-sm mr-1"/>}
             Login
           </button>
-          <p className={s.contact}>ยังไม่มีบัญชี? สนใจใช้งาน <a href={LINE_URL} target="_blank" rel="noopener noreferrer">ติดต่อ LINE @englishmeup</a></p>
+          <p className={s.contact}>ยังไม่มีบัญชี? <a href="#buy">ดูวิธีได้ใช้ WORD ME UP</a></p>
         </form>
+
+        {/* v1.4: ราคา + วิธีได้ใช้ (คนที่ยังไม่รู้จักจะได้ไม่ต้องทักถาม) */}
+        <section className={s.buy} id="buy" aria-labelledby="bh">
+          <h2 id="bh">ยังไม่มีบัญชี? ใช้ได้ 2 ทาง</h2>
+          <div className={s.way}>
+            <span className={s.wayN}>1</span>
+            <div>
+              <b>เรียนคอร์สเตรียมสอบกับ ENG ME UP · <em className={s.free}>ได้ใช้ฟรี</em></b>
+              <p>ทุกคอร์ส ทั้ง Standard และ Full Package</p>
+              <div className={s.courses}>
+                {COURSES.map(([n, u]) => <a key={n} href={u} target="_blank" rel="noopener noreferrer">ดูคอร์ส {n}</a>)}
+              </div>
+            </div>
+          </div>
+          <div className={s.way}>
+            <span className={s.wayN}>2</span>
+            <div>
+              <b>ซื้อแยก <span className={s.price}>{PRICE} บาท</span> / สนาม</b>
+              <p>ใช้ได้ 1 ปี · เลือก CU-TEP, TOEIC หรือ IELTS</p>
+              <a className={`${s.btn} ${s.btnL}`} href={LINE_URL} target="_blank" rel="noopener noreferrer">สั่งซื้อทาง LINE @englishmeup</a>
+            </div>
+          </div>
+          <p className={s.buyNote}>ยังไม่แน่ใจ? <Link href="/practice/demo"><a>ลองเล่น Let&apos;s Practice ฟรี</a></Link> ไม่ต้อง login</p>
+        </section>
         <img className={`${s.art} ${s.artSide}`} src="/practice/img/train.webp" alt="นักเรียน ENG ME UP ซ้อมสู้ข้อสอบ TEST โดยมีครูโจคอยดู" width="720" height="402" />
         </div>
 
         <section className={s.feat} aria-labelledby="fh">
-          <h2 id="fh">ใน WORD ME UP มี 2 ส่วน ใช้คู่กัน</h2>
+          <h2 id="fh">WORD ME UP · 2 Ways Interactive Software</h2>
+          <p className={s.lead}>ศัพท์ตรงสนาม CU-TEP · TOEIC · IELTS สนามละ 600 คำ ใช้ได้ทั้งคอม iPad และมือถือ · 2 ส่วนนี้ใช้คู่กัน</p>
           <div className={s.cards}>
             <article className={s.fc}>
               <div className={s.vis} aria-hidden="true">
@@ -119,7 +151,7 @@ export default function Home() {
               </div>
               <div className={s.txt}>
                 <h3><span className={s.num}>1</span>การ์ดท่องศัพท์ <small>Intelligent Flashcard</small></h3>
-                <p>ท่องวันละ 5–7 คำ นึกความหมายแล้วพลิกการ์ด ฟังเสียงอ่าน แล้วเลือกความยาก ระบบจะนัดทวนให้เองตามความจำของคุณ</p>
+                <p><b>จำศัพท์ให้ติดทน</b> ตามหลักงานวิจัยเรื่องความจำ เปลี่ยนความจำระยะสั้นให้เป็นความจำถาวร · ท่องวันละ 5–7 คำ นึกความหมายแล้วพลิกการ์ด ฟังเสียงอ่าน แล้วเลือกความยาก ระบบจะนัดทวนให้เองตามความจำของคุณ</p>
                 <div className={s.acts}><button className={`${s.btn} ${s.btnG}`} type="button" onClick={() => howto('cards')}>ดูวิธีใช้การ์ด</button></div>
               </div>
             </article>
@@ -129,7 +161,7 @@ export default function Home() {
               </div>
               <div className={s.txt}>
                 <h3><span className={`${s.num} ${s.numLp}`}>2</span>Let&apos;s Practice {isNew && <span className={s.new}>ใหม่</span>}</h3>
-                <p>ฝึกใช้คำที่ท่องแล้ว 6 ด่านแบบเกม เก็บดาว เก็บคำเข้าสมุดคำศัพท์ ตอบผิดได้ เดี๋ยวคำนั้นวนกลับมาให้ลองใหม่</p>
+                <p><b>ฝึกใช้คำให้ถูกต้องแม่นยำ</b> ทั้งความหมายตามบริบทและไวยากรณ์ ซึ่งเป็นจุดบอดที่ทำให้เสียแต้มบ่อย · 6 ด่านแบบเกม เก็บดาว เก็บคำเข้าสมุดคำศัพท์ ตอบผิดได้ เดี๋ยวคำนั้นวนกลับมาให้ลองใหม่</p>
                 <div className={s.chips}><span>จับคู่</span><span>แยกชนิดคำ</span><span>คำเหมือน</span><span>เติมประโยค</span><span>รูปคำ</span><span>บอส</span></div>
                 <div className={s.acts}>
                   <Link href="/practice/demo"><a className={`${s.btn} ${s.btnP}`}>ลองเล่นฟรี (ไม่ต้อง login)</a></Link>
